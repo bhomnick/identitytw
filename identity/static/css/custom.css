@@ -1,0 +1,62 @@
+.api label, .api input {
+    display: inline-block;
+}
+
+.api label {
+    font-weight: bold;
+}
+
+.api input {
+    width: 60%;
+}
+
+.api button {
+    width: 35% !important;
+}
+
+.api pre {
+    margin: 20px 0 35px 0 !important;
+}   
+
+.api .try-it {
+    background-color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.api .try-it h3, .api .try-it h4 {
+    width: 100%;
+    text-align: left;
+}
+
+.api .try-it form {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.btn:disabled {
+    opacity: 35%;
+}
+
+#api-request, #api-response {
+    display: inline-block;
+    width: 100%;
+    margin: 10px 0 0 0 !important;
+}
+
+.library-languages {
+    margin-top: 25px;
+}
+
+.report-table {
+    table-layout: auto;
+}
+
+.report-table td {
+    max-width:100%;
+    white-space:nowrap;
+}
+
+.report-table ul {
+    margin: 0;
+}
