@@ -130,9 +130,10 @@
             <li><a href="#">Python</a></li>
             <li><a href="#">PHP</a></li>
             <li><a href="#">Go</a></li>
+            <li><a href="#">Java</a></li>
           </ul>
           <div class="panel active">
-            <pre><code class="language-js">ID_REGEX = /^[A-Z]{1}[A-Z0-9]{1}[0-9]{8}$/;
+            <pre><code class="language-js">ID_REGEX = /^[A-Z]{1}[A-D0-9]{1}[0-9]{8}$/;
 ID_LETTERS = 'ABCDEFGHJKLMNPQRSTUVXYWZIO';
 
 function isValid(id) {
@@ -160,7 +161,79 @@ function isValid(id) {
 }</code></pre>
           </div>
           <div class="panel">
-            <h2>Coming soon</h2>
+<pre><code class="language-python">import math
+import re
+
+ID_REGEX = '^[A-Z]{1}[A-D0-9]{1}[0-9]{8}$';
+ID_LETTERS = 'ABCDEFGHJKLMNPQRSTUVXYWZIO';
+
+def isValid(id_no):
+    id_no = id_no.upper()
+    regex = re.compile(ID_REGEX)
+    if (regex.match(id_no) is None):
+        return False
+
+    letterIndex = ID_LETTERS.index(id_no[0])
+    checksum = math.floor(letterIndex / 10 + 1) + (letterIndex * 9)
+
+    # Legacy ARC
+    if (re.match('[A-Z]', id_no[1])):
+        checksum = checksum + (ID_LETTERS.index(id_no[1]) % 10) * 8;
+    else:
+        checksum = checksum + int(id_no[1]) * 8
+
+    for position in range(2, 9):
+        checksum = checksum + (9 - position) * int(id_no[position])
+
+    checksum = checksum + int(id_no[9])
+
+    if (checksum % 10) == 0:
+        return True
+    else:
+        return False
+</code></pre>
+
+          </div>
+          <div class="panel">
+<pre><code class="language-php">&lt;?php
+
+define("ID_REGEX", '/^[A-Z]{1}[A-D0-9]{1}[0-9]{8}$/');
+define("ID_LETTERS", 'ABCDEFGHJKLMNPQRSTUVXYWZIO');
+
+
+function isValid($id_no)
+{
+
+  if (preg_match(ID_REGEX, $id_no) != 1)
+  {
+    return false;
+  }
+
+  $letterIndex = strpos(ID_LETTERS, $id_no[0]);
+  $checksum = floor($letterIndex / 10 + 1) + ($letterIndex * 9);
+
+  // Legacy ARC
+  if (preg_match('/[A-Z]/', $id_no[1]) == 1)
+  {
+    $checksum += (strpos(ID_LETTERS, $id_no[1]) % 10) * 8;
+  } else {
+    $checksum += intval($id_no[1]) * 8;
+  }
+  
+  for ($i = 2 ; $i < 9 ; $i++) { 
+    $checksum += (9 - $i) * intval($id_no[$i]);
+  }
+  $checksum += intval($id_no[9]);
+
+  if (($checksum % 10) == 0){
+    return true;
+  } else {
+    return false;
+  }
+
+}
+?>
+</code></pre>
           </div>
           <div class="panel">
             <h2>Coming soon</h2>
@@ -189,7 +262,7 @@ function isValid(id) {
               </thead>
               <tbody>
                 <tr>
-                  <td><a href="#">Taiwan Railways</a></td>
+                  <td><a href="https://www.railway.gov.tw/tra-tip-web/tip/tip001/tip121/query">Taiwan Railways</a></td>
                   <td>Transportation</td>
                   <td>12/29/2020</td>
                   <td>C</td>
@@ -201,7 +274,7 @@ function isValid(id) {
                   </td>
                 </tr>
                 <tr>
-                  <td><a href="#">Taiwan HSR</a></td>
+                  <td><a href=""https://irs.thsrc.com.tw/IMINT/>Taiwan HSR</a></td>
                   <td>Transportation</td>
                   <td>12/29/2020</td>
                   <td>C</td>
@@ -209,6 +282,67 @@ function isValid(id) {
                     <ul>
                       <li>Separate UI for citizen/non-citizen ID handling</li>
                       <li>Partial service restriction for non-citizens</li>
+                    </ul>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="http://myname.pchome.com.tw/">PCHome MyName</a></td>
+                  <td>Internet</td>
+                  <td>12/09/2020</td>
+                  <td>F</td>
+                  <td>
+                    <ul>
+                      <li>Online service fully restricted to citizens</li>
+                      <li>Resident ID numbers not accepted</li>
+                      <li>After contacting support, residents are asked to fax photocopies of ID.</li>
+                    </ul>
+                  </td>
+                </tr>
+                 <tr>
+                  <td><a href="https://signin.104.com.tw/register">104.com.tw Registration</a></td>
+                  <td>Internet</td>
+                  <td>12/09/2020</td>
+                  <td>F</td>
+                  <td>
+                    <ul>
+                      <li>Resident ID numbers not accepted</li>
+                    </ul>
+                  </td>
+                </tr>
+                 <tr>
+                  <td><a href="https://tvrs.ntpd.gov.tw/#events/index">New Taipei City Police Traffic Offense Report</a></td>
+                  <td>Government</td>
+                  <td>12/09/2020</td>
+                  <td>F</td>
+                  <td>
+                    <ul>
+                      <li>Resident ID numbers not accepted</li>
+                      <li>Residents are asked to provide a scan of their ID.</li>
+                    </ul>
+                  </td>
+                </tr>
+                 <tr>
+                  <td><a href="https://www.hpb.gov.tw/p/412-1000-116.php?Lang=zh-tw">Highway Police Traffic Offense Report</a></td>
+                  <td>Government</td>
+                  <td>12/09/2020</td>
+                  <td>F</td>
+                  <td>
+                    <ul>
+                      <li>Separate UI for citizen/non-citizen ID handling</li>
+                      <li>Resident ID numbers not accepted.</li>
+                      <li>Residents have made repeated complaints, with no change.</li>
+                    </ul>
+                  </td>
+                </tr>
+                 <tr>
+                  <td><a href="https://prsweb.tcpd.gov.tw/#/New">Taipei City Police Traffic Offense Report</a></td>
+                  <td>Government</td>
+                  <td>12/09/2020</td>
+                  <td>D</td>
+                  <td>
+                    <ul>
+                      <li>Old-format resident ID numbers accepted.</li>
+                      <li>New-format resident ID numbers not accepted.</li>
                     </ul>
                   </td>
                 </tr>
