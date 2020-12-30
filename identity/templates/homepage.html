@@ -204,6 +204,7 @@ define("ID_LETTERS", 'ABCDEFGHJKLMNPQRSTUVXYWZIO');
 function isValid($id_no)
 {
 
+  $id_no = strtoupper($id_no);
   if (preg_match(ID_REGEX, $id_no) != 1)
   {
     return false;
