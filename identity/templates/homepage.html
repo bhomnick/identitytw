@@ -195,7 +195,45 @@ def isValid(id_no):
 
           </div>
           <div class="panel">
-            <h2>Coming soon</h2>
+<pre><code class="language-php">&lt;?php
+
+define("ID_REGEX", '/^[A-Z]{1}[A-D0-9]{1}[0-9]{8}$/');
+define("ID_LETTERS", 'ABCDEFGHJKLMNPQRSTUVXYWZIO');
+
+
+function isValid($id_no)
+{
+
+  if (preg_match(ID_REGEX, $id_no) != 1)
+  {
+    return false;
+  }
+
+  $letterIndex = strpos(ID_LETTERS, $id_no[0]);
+  $checksum = floor($letterIndex / 10 + 1) + ($letterIndex * 9);
+
+  // Legacy ARC
+  if (preg_match('/[A-Z]/', $id_no[1]) == 1)
+  {
+    $checksum += (strpos(ID_LETTERS, $id_no[1]) % 10) * 8;
+  } else {
+    $checksum += intval($id_no[1]) * 8;
+  }
+  
+  for ($i = 2 ; $i < 9 ; $i++) { 
+    $checksum += (9 - $i) * intval($id_no[$i]);
+  }
+  $checksum += intval($id_no[9]);
+
+  if (($checksum % 10) == 0){
+    return true;
+  } else {
+    return false;
+  }
+
+}
+?>
+</code></pre>
           </div>
           <div class="panel">
             <h2>Coming soon</h2>
