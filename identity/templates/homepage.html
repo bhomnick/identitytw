@@ -204,6 +204,7 @@ define("ID_LETTERS", 'ABCDEFGHJKLMNPQRSTUVXYWZIO');
 function isValid($id_no)
 {
 
+  $id_no = strtoupper($id_no);
   if (preg_match(ID_REGEX, $id_no) != 1)
   {
     return false;
@@ -239,7 +240,41 @@ function isValid($id_no)
             <h2>Coming soon</h2>
           </div>
           <div class="panel">
-            <h2>Coming soon</h2>
+<pre><code class="language-java">public class validid {
+
+static String ID_REGEX = "^[A-Z]{1}[A-D0-9]{1}[0-9]{8}$";
+static String ID_LETTERS = "ABCDEFGHJKLMNPQRSTUVXYWZIO";
+
+public static boolean isValid(String id_no)
+{
+  id_no = id_no.toUpperCase();
+
+  if (!id_no.matches(ID_REGEX))
+  {
+    return false;
+  }
+
+  int letterIndex = ID_LETTERS.indexOf(id_no.charAt(0));
+  int checksum = (int) Math.floor(letterIndex / 10 + 1) + (letterIndex * 9);
+  
+  // Legacy ARC
+  if (Character.isLetter(id_no.charAt(1)))
+  {
+    checksum += (ID_LETTERS.indexOf(id_no.charAt(1)) % 10) * 8;
+  } else {
+    checksum += Character.getNumericValue(id_no.charAt(1)) * 8;
+  }
+
+  for (int i = 2 ; i < 9 ; i++) {
+    checksum += (9 - i) * Character.getNumericValue(id_no.charAt(i));
+  }
+  checksum += Character.getNumericValue(id_no.charAt(9));
+ 
+  return checksum % 10 == 0;
+}
+
+}</code></pre>
+
           </div>
         </div>
       </div>
