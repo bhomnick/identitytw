@@ -28,7 +28,7 @@ CRITERIA = {
         0
     ),
     LEGACY_ARC_SEPARATE_SUPPORT: ScoringCriteria(
-        _('Legacy ARC support in separate UI'),
+        _('Legacy ARC requires separate UI'),
         _('Accepts legacy ARC number in a separate UI (passport number, for instance)'),
         -10
     ),
@@ -43,7 +43,7 @@ CRITERIA = {
         0
     ),
     NEW_ARC_SEPARATE_SUPPORT: ScoringCriteria(
-        _('New ARC support in separate UI'),
+        _('New ARC requires separate UI'),
         _('Accepts new ARC number in a separate UI (passport number, for instance)'),
         -10
     ),
@@ -124,6 +124,20 @@ class Provider(models.Model):
         REGISTRATION_OFFLINE
     ), verbose_name='Registration Score', help_text='Does this site require extra registration steps for non-citizens?')
 
+    SCORED_FIELDS = [
+        'legacy_arc_score',
+        'new_arc_score',
+        'service_score',
+        'registration_score'
+    ]
+
+    class Meta:
+        ordering = ['name']
+
+    @property
+    def scored_criteria(self):
+        return [getattr(self, field) for field in self.SCORED_FIELDS]
+
     @property
     def grade(self):
         if self.score is None:
@@ -142,14 +156,13 @@ class Provider(models.Model):
             return 'E'
         return 'F'
 
+    @property
+    def score_reasons(self):
+        return [CRITERIA[c].short_desc for c in self.scored_criteria if CRITERIA[c].points != 0]
+
     def update_score(self):
         score = 100
-        for criteria in [
-            self.legacy_arc_score,
-            self.new_arc_score,
-            self.service_score,
-            self.registration_score
-        ]:
+        for criteria in self.scored_criteria:
             score += CRITERIA[criteria].points
         self.score = score
 
