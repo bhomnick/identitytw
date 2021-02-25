@@ -15,6 +15,7 @@ DEBUG = TEMPLATE_DEBUG = env.bool('DEBUG', default=False)
 
 ALLOWED_HOSTS = [
     'localhost',
+    '127.0.0.1',
     'identitytw.herokuapp.com',
     'identity.tw'
 ]
