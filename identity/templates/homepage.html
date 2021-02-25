@@ -240,39 +240,35 @@ function isValid($id_no)
             <h2>Coming soon</h2>
           </div>
           <div class="panel">
-<pre><code class="language-java">public class validid {
+<pre><code class="language-java">public class ValidId {
 
-static String ID_REGEX = "^[A-Z]{1}[A-D0-9]{1}[0-9]{8}$";
-static String ID_LETTERS = "ABCDEFGHJKLMNPQRSTUVXYWZIO";
+  static final String ID_REGEX = "^[A-Z]{1}[A-D0-9]{1}[0-9]{8}$";
+  static final String ID_LETTERS = "ABCDEFGHJKLMNPQRSTUVXYWZIO";
 
-public static boolean isValid(String id_no)
-{
-  id_no = id_no.toUpperCase();
+  public static boolean isValid(String idNo) {
+    idNo = idNo.toUpperCase();
 
-  if (!id_no.matches(ID_REGEX))
-  {
-    return false;
-  }
+    if (!idNo.matches(ID_REGEX)) {
+      return false;
+    }
 
-  int letterIndex = ID_LETTERS.indexOf(id_no.charAt(0));
-  int checksum = (int) Math.floor(letterIndex / 10 + 1) + (letterIndex * 9);
+    int letterIndex = ID_LETTERS.indexOf(idNo.charAt(0));
+    int checksum = (int) Math.floor(letterIndex / 10 + 1) + (letterIndex * 9);
   
-  // Legacy ARC
-  if (Character.isLetter(id_no.charAt(1)))
-  {
-    checksum += (ID_LETTERS.indexOf(id_no.charAt(1)) % 10) * 8;
-  } else {
-    checksum += Character.getNumericValue(id_no.charAt(1)) * 8;
-  }
+    // Legacy ARC
+    if (Character.isLetter(idNo.charAt(1))) {
+      checksum += (ID_LETTERS.indexOf(idNo.charAt(1)) % 10) * 8;
+    } else {
+      checksum += Character.getNumericValue(idNo.charAt(1)) * 8;
+    }
 
-  for (int i = 2 ; i < 9 ; i++) {
-    checksum += (9 - i) * Character.getNumericValue(id_no.charAt(i));
-  }
-  checksum += Character.getNumericValue(id_no.charAt(9));
+    for (int i = 2 ; i < 9 ; i++) {
+      checksum += (9 - i) * Character.getNumericValue(idNo.charAt(i));
+    }
+    checksum += Character.getNumericValue(idNo.charAt(9));
  
-  return checksum % 10 == 0;
-}
-
+    return checksum % 10 == 0;
+  }
 }</code></pre>
 
           </div>
@@ -296,91 +292,23 @@ public static boolean isValid(String id_no)
                 </tr>
               </thead>
               <tbody>
+                {% for provider in providers %}
                 <tr>
-                  <td><a href="https://www.railway.gov.tw/tra-tip-web/tip/tip001/tip121/query">Taiwan Railways</a></td>
-                  <td>Transportation</td>
-                  <td>12/29/2020</td>
-                  <td>C</td>
+                  <td><a target="_blank" href="{{ provider.url }}">{{ provider.name }}</a></td>
+                  <td>{{ provider.category.name }}</td>
+                  <td>{{ provider.updated|date:'Y/m/d' }}</td>
+                  <td>{{ provider.grade }}</td>
                   <td>
+                    {% if provider.score_reasons %}
                     <ul>
-                      <li>Separate UI for citizen/non-citizen ID handling</li>
-                      <li>Partial service restriction for non-citizens</li>
+                      {% for reason in provider.score_reasons %}
+                      <li>{{ reason }}</li>
+                      {% endfor %}
                     </ul>
+                    {% endif %}
                   </td>
                 </tr>
-                <tr>
-                  <td><a href=""https://irs.thsrc.com.tw/IMINT/>Taiwan HSR</a></td>
-                  <td>Transportation</td>
-                  <td>12/29/2020</td>
-                  <td>C</td>
-                  <td>
-                    <ul>
-                      <li>Separate UI for citizen/non-citizen ID handling</li>
-                      <li>Partial service restriction for non-citizens</li>
-                    </ul>
-                  </td>
-                </tr>
-                <tr>
-                  <td><a href="http://myname.pchome.com.tw/">PCHome MyName</a></td>
-                  <td>Internet</td>
-                  <td>12/09/2020</td>
-                  <td>F</td>
-                  <td>
-                    <ul>
-                      <li>Online service fully restricted to citizens</li>
-                      <li>Resident ID numbers not accepted</li>
-                      <li>After contacting support, residents are asked to fax photocopies of ID.</li>
-                    </ul>
-                  </td>
-                </tr>
-                 <tr>
-                  <td><a href="https://signin.104.com.tw/register">104.com.tw Registration</a></td>
-                  <td>Internet</td>
-                  <td>12/09/2020</td>
-                  <td>F</td>
-                  <td>
-                    <ul>
-                      <li>Resident ID numbers not accepted</li>
-                    </ul>
-                  </td>
-                </tr>
-                 <tr>
-                  <td><a href="https://tvrs.ntpd.gov.tw/#events/index">New Taipei City Police Traffic Offense Report</a></td>
-                  <td>Government</td>
-                  <td>12/09/2020</td>
-                  <td>F</td>
-                  <td>
-                    <ul>
-                      <li>Resident ID numbers not accepted</li>
-                      <li>Residents are asked to provide a scan of their ID.</li>
-                    </ul>
-                  </td>
-                </tr>
-                 <tr>
-                  <td><a href="https://www.hpb.gov.tw/p/412-1000-116.php?Lang=zh-tw">Highway Police Traffic Offense Report</a></td>
-                  <td>Government</td>
-                  <td>12/09/2020</td>
-                  <td>F</td>
-                  <td>
-                    <ul>
-                      <li>Separate UI for citizen/non-citizen ID handling</li>
-                      <li>Resident ID numbers not accepted.</li>
-                      <li>Residents have made repeated complaints, with no change.</li>
-                    </ul>
-                  </td>
-                </tr>
-                 <tr>
-                  <td><a href="https://prsweb.tcpd.gov.tw/#/New">Taipei City Police Traffic Offense Report</a></td>
-                  <td>Government</td>
-                  <td>12/09/2020</td>
-                  <td>D</td>
-                  <td>
-                    <ul>
-                      <li>Old-format resident ID numbers accepted.</li>
-                      <li>New-format resident ID numbers not accepted.</li>
-                    </ul>
-                  </td>
-                </tr>
+                {% endfor %}    
               </tbody>
             </table>
           </div>
