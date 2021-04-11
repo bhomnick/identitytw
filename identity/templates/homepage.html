@@ -133,7 +133,7 @@
             <li><a href="#">Java</a></li>
           </ul>
           <div class="panel active">
-            <pre><code class="language-js">ID_REGEX = /^[A-Z]{1}[A-D0-9]{1}[0-9]{8}$/;
+            <pre><code class="language-js">ID_REGEX = /^[A-Z]{1}[1-2A-D8-9]{1}[0-9]{8}$/;
 ID_LETTERS = 'ABCDEFGHJKLMNPQRSTUVXYWZIO';
 
 function isValid(id) {
@@ -164,7 +164,7 @@ function isValid(id) {
 <pre><code class="language-python">import math
 import re
 
-ID_REGEX = '^[A-Z]{1}[A-D0-9]{1}[0-9]{8}$';
+ID_REGEX = '^[A-Z]{1}[1-2A-D8-9]{1}[0-9]{8}$';
 ID_LETTERS = 'ABCDEFGHJKLMNPQRSTUVXYWZIO';
 
 def isValid(id_no):
@@ -197,7 +197,7 @@ def isValid(id_no):
           <div class="panel">
 <pre><code class="language-php">&lt;?php
 
-define("ID_REGEX", '/^[A-Z]{1}[A-D0-9]{1}[0-9]{8}$/');
+define("ID_REGEX", '/^[A-Z]{1}[1-2A-D8-9]{1}[0-9]{8}$/');
 define("ID_LETTERS", 'ABCDEFGHJKLMNPQRSTUVXYWZIO');
 
 
@@ -242,7 +242,7 @@ function isValid($id_no)
           <div class="panel">
 <pre><code class="language-java">public class ValidId {
 
-  static final String ID_REGEX = "^[A-Z]{1}[A-D0-9]{1}[0-9]{8}$";
+  static final String ID_REGEX = "^[A-Z]{1}[1-2A-D8-9]{1}[0-9]{8}$";
   static final String ID_LETTERS = "ABCDEFGHJKLMNPQRSTUVXYWZIO";
 
   public static boolean isValid(String idNo) {
