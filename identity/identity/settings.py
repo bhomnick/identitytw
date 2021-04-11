@@ -47,7 +47,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'common.middleware.HerokuRedirectMiddleware'
+    'common.middleware.HerokuRedirectMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
 ]
 
 # DB
@@ -136,7 +137,7 @@ LOCALE_PATHS = (
 )
 
 LANGUAGES = [
-    ('zh-hant-tw', _('Traditional Chinese')),
+    ('zh-hant', _('Traditional Chinese')),
     ('en-us', _('US English')),
 ]
 

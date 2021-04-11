@@ -19,7 +19,7 @@ msgstr ""
 
 #: common/models.py:26
 msgid "Full legacy ARC support"
-msgstr ""
+msgstr "舊式外來人口統一證號完成接受"
 
 #: common/models.py:27
 msgid "Fully accepts legacy ARC number in place of ROC ID"
@@ -27,171 +27,171 @@ msgstr ""
 
 #: common/models.py:31
 msgid "Legacy ARC requires separate UI"
-msgstr ""
+msgstr "舊式外來人口統一證號需要單獨的UI"
 
 #: common/models.py:32
 msgid ""
 "Accepts legacy ARC number in a separate UI (passport number, for instance)"
-msgstr ""
+msgstr "舊式外來人口統一證號需要單獨的UI (例如護照號碼）"
 
 #: common/models.py:36
 msgid "No legacy ARC support"
-msgstr ""
+msgstr "不接受舊式外來人口統一證號"
 
 #: common/models.py:37
 msgid "Does not accept legacy ARC numbers"
-msgstr ""
+msgstr "不接受舊式外來人口統一證號"
 
 #: common/models.py:41
 msgid "Full new ARC support"
-msgstr ""
+msgstr "新式外來人口統一證號完成接受"
 
 #: common/models.py:42
 msgid "Fully accepts new ARC number in place of ROC ID"
-msgstr ""
+msgstr "新式外來人口統一證號完成接受"
 
 #: common/models.py:46
 msgid "New ARC requires separate UI"
-msgstr ""
+msgstr "新式外來人口統一證號需要單獨的UI"
 
 #: common/models.py:47
 msgid "Accepts new ARC number in a separate UI (passport number, for instance)"
-msgstr ""
+msgstr "新式外來人口統一證號需要單獨的UI (例如護照號碼）"
 
 #: common/models.py:51
 msgid "No new ARC support"
-msgstr ""
+msgstr "不接受新式外來人口統一證號"
 
 #: common/models.py:52
 msgid "Does not accept new ARC numbers"
-msgstr ""
+msgstr "不接受新式外來人口統一證號"
 
 #: common/models.py:56
 msgid "Full service for all users"
-msgstr ""
+msgstr "為所有用戶提供相同的服務"
 
 #: common/models.py:57
 msgid "Provides same service to all users"
-msgstr ""
+msgstr "為所有用戶提供相同的服務"
 
 #: common/models.py:61
 msgid "Some services not available to non-citizens"
-msgstr ""
+msgstr "非國民無法使用某些服務"
 
 #: common/models.py:62
 msgid "A portion of features not available to non-citizens"
-msgstr ""
+msgstr "非國民無法使用某些服務"
 
 #: common/models.py:66
 msgid "Denies service to non-citizens"
-msgstr ""
+msgstr "非國民被拒絕使用所有服務"
 
 #: common/models.py:67
 msgid "Denies all services to non-citizens"
-msgstr ""
+msgstr "非國民被拒絕使用所有服務"
 
 #: common/models.py:71
 msgid "All users may register online"
-msgstr ""
+msgstr "所有用戶都可以在線註冊"
 
 #: common/models.py:72
 msgid "All users may register online using the same process"
-msgstr ""
+msgstr "所有用戶都可以使用相同的流程在線註冊"
 
 #: common/models.py:76
 msgid "Non-citizens require offline registration"
-msgstr ""
+msgstr "非公民需要離線註冊"
 
 #: common/models.py:77
 msgid "Non-citizens require additional offline registration steps"
-msgstr ""
+msgstr "非國民需要離線註冊步驟"
 
 #: identity/settings.py:139
 msgid "Traditional Chinese"
-msgstr ""
+msgstr "整體中文"
 
 #: identity/settings.py:140
 msgid "US English"
-msgstr ""
+msgstr "英文"
 
 #: templates/homepage.html:10 templates/homepage.html:36
 msgid "Inclusive Taiwan Identification Number Validation"
-msgstr ""
+msgstr "既包容性的身份驗證"
 
 #: templates/homepage.html:39
 msgid ""
 "Tools for ensuring everyone has equal access to online services and "
 "platforms."
-msgstr ""
+msgstr "確保每個台灣居民都能平等使用在線服務和平台的工具。"
 
 #: templates/homepage.html:55
 msgid "Validation API"
-msgstr ""
+msgstr "驗證API"
 
 #: templates/homepage.html:56
 msgid "Free hosted validation service"
-msgstr ""
+msgstr "免費線上的驗證服務"
 
 #: templates/homepage.html:64
 msgid "Libraries"
-msgstr ""
+msgstr "函式庫"
 
 #: templates/homepage.html:65
 msgid "Validation libraries for major software languages"
-msgstr ""
+msgstr "主要軟體語言的驗證庫"
 
 #: templates/homepage.html:73 templates/homepage.html:283
 msgid "Transparency Report"
-msgstr ""
+msgstr "透明度報告"
 
 #: templates/homepage.html:74
 msgid "See how online platforms compare"
-msgstr ""
+msgstr "查看在線服務提供商的差別"
 
 #: templates/homepage.html:87
 msgid "Hosted Validation Service"
-msgstr ""
+msgstr "線上的驗證服務"
 
 #: templates/homepage.html:93
 msgid "Example request:"
-msgstr ""
+msgstr "請求示例："
 
 #: templates/homepage.html:97
 msgid "Example response:"
-msgstr ""
+msgstr "響應示例:"
 
 #: templates/homepage.html:106
 msgid "Try it out:"
-msgstr ""
+msgstr "試試看："
 
 #: templates/homepage.html:113
 msgid "Request:"
-msgstr ""
+msgstr "請求:"
 
 #: templates/homepage.html:115
 msgid "Response:"
-msgstr ""
+msgstr "響應:"
 
 #: templates/homepage.html:125
 msgid "Validation Libraries"
-msgstr ""
+msgstr "驗證函式庫"
 
 #: templates/homepage.html:284
 msgid "See how online service providers compare."
-msgstr ""
+msgstr "查看在線服務提供商的差別"
 
 #: templates/homepage.html:289
 msgid "Category"
-msgstr ""
+msgstr "類別"
 
 #: templates/homepage.html:290
 msgid "Updated"
-msgstr ""
+msgstr "更新時間"
 
 #: templates/homepage.html:291
 msgid "Score"
-msgstr ""
+msgstr "等級"
 
 #: templates/homepage.html:292
 msgid "Details"
-msgstr ""
+msgstr "詳細信息"
