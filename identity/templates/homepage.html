@@ -1,4 +1,5 @@
-﻿{% load static %}
+﻿{% load i18n %}
+{% load static %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -6,7 +7,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Inclusive Taiwan Identification Number Validation</title>
+  <title>{% translate "Inclusive Taiwan Identification Number Validation" %}</title>
   <meta name="description" content="">
   <script src="{% static 'scripts/jquery.min.js' %}"></script>
   <script src="{% static 'scripts/main.js' %}"></script>
@@ -32,14 +33,27 @@
             <hr class="space" />
             <hr class="space-lg" />
             <h1>
-              Inclusive Taiwan Identification Number Validation
+              {% translate "Inclusive Taiwan Identification Number Validation" %}
             </h1>
             <p>
-              Tools for ensuring everyone has equal access to online services and platforms.
+              {% translate "Tools for ensuring everyone has equal access to online services and platforms." %}
             </p>
           </div>
           <div class="col-lg-6 hidden-md" style="width: 100%; height: 100%; background-image: url({% static 'media/phone-wall2.png' %}); background-position: 0 -100px; background-size: 650px;"></div>
         </div>
+        {% get_current_language as LANGUAGE_CODE %}
+        {% get_available_languages as LANGUAGES %}
+        {% get_language_info_list for LANGUAGES as languages %}
+        {% for language in languages %}
+	{% if language.code != LANGUAGE_CODE %}
+<form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+    <input name="language" type="hidden" value="{{ language.code }}">
+    <input name="next" type="hidden" value="{{ redirect_to }}">
+    <input class="btn btn-link" type="submit" value="{{ language.name_local }}">
+</form>
+	{% endif %}
+        {% endfor %}
+
       </div>
     </section>
     <section class="section-base">
@@ -51,8 +65,8 @@
 								<div class="cnt-box cnt-box-top-icon align-center" data-href="#">
 									<i class="im-cloud"></i>
 									<div class="caption">
-										<h2>Validation API</h2>
-										<p>Free hosted validation service</p>
+										<h2>{% translate "Validation API" %}</h2>
+										<p>{% translate "Free hosted validation service" %}</p>
 									</div>
 								</div>
 							</td>
@@ -60,8 +74,8 @@
 								<div class="cnt-box cnt-box-top-icon align-center" data-href="#">
 									<i class="im-library-2"></i>
 									<div class="caption">
-										<h2>Libraries</h2>
-										<p>Validation libraries for major software languages</p>
+										<h2>{% translate "Libraries" %}</h2>
+										<p>{% translate "Validation libraries for major software languages" %}</p>
 									</div>
 								</div>
 							</td>
@@ -69,8 +83,8 @@
 								<div class="cnt-box cnt-box-top-icon align-center" data-href="#">
 									<i class="im-spell-check"></i>
 									<div class="caption">
-										<h2>Transparency Report</h2>
-										<p>See how online platforms compare</p>
+										<h2>{% translate "Transparency Report" %}</h2>
+										<p>{% translate "See how online platforms compare" %}</p>
 									</div>
 								</div>
 							</td>
@@ -83,17 +97,16 @@
 			<div class="container">
 				<div class="row  align-items-center">
 					<div class="col-lg-6" data-anima="fade-left" data-time="1000">
-						<h2 id="validation-service">Hosted Validation Service</h2>
+						<h2 id="validation-service">{% translate "Hosted Validation Service" %}</h2>
 						<p>
-							This ID number validation API covers all forms of legal resident 
-							ID numbers and is provided free of charge.
+						{% translate "This ID number validation API covers all forms of legal resident ID numbers and is provided free of charge." %}
 						</p>
 						
-						<h3>Example request:</h3>
+						<h3>{% translate "Example request:" %}</h3>
 						
 						<pre><code class="language-js">https://v.identity.tw?id=G112233445</code></pre>
 						
-						<h3>Example response:</h3>
+						<h3>{% translate "Example response:" %}</h3>
 						
 						<pre><code class="language-json">{
   "id": "G112233445",
@@ -102,16 +115,16 @@
 					</div>
 					<div class="col-lg-6 api" data-anima="fade-right" data-time="1000">
 					  <div class="cnt-box boxed try-it"> 
-              <h3>Try it out:</h3>
+              <h3>{% translate "Try it out:" %}</h3>
               <form class="from-box form-inline">
                 <input id="id" name="id" placeholder="ID number" class="input-text">
                 <button class="btn btn-sm" type="submit" id="api-submit" disabled>Submit</button>
               </form>
               
               <div id="api-example" style="display: none;">
-                <h4>Request:</h4>
+                <h4>{% translate "Request:" %}</h4>
                 <pre id="api-request"><code class="language-http"></code></pre>
-                <h4>Response:</h4>
+                <h4>{% translate "Response:" %}</h4>
                 <pre id="api-response"><code class="language-json"></code></pre>            
               </div>
             </div>
@@ -121,9 +134,8 @@
 		</section>
 		<section class="section-base section-libraries">
       <div class="container">
-        <h2 id="validation-libraries">Validation Libraries</h2>
-        <p>These libraries cover all forms of legal resident ID numbers. Choose
-        your language:</p>
+        <h2 id="validation-libraries">{% translate "Validation Libraries" %}</h2>
+        <p>{% translate "These libraries cover all forms of legal resident ID numbers. Choose your language:" %}</p>
         <div class="library-languages tab-box tab-vertical" data-tab-anima="fade-in">
           <ul class="tab-nav">
             <li class="active"><a href="#">Javascript</a></li>
@@ -279,16 +291,16 @@ function isValid($id_no)
 			<div class="container">
 			  <div class="row">
           <div class="col-lg-12">
-            <h2 id="transparency-report">Transparency Report</h2>
-            <p>See how online service providers compare.</p>
+            <h2 id="translateparency-report">{% translate "Transparency Report" %}</h2>
+            <p>{% translate "See how online service providers compare." %}</p>
             <table class="report-table table table-border">
               <thead>
                 <tr>
                   <th></th>
-                  <th>Category</th>
-                  <th>Updated</th>
-                  <th>Score</th>
-                  <th>Details</th>
+                  <th>{% translate "Category" %}</th>
+                  <th>{% translate "Updated" %}</th>
+                  <th>{% translate "Score" %}</th>
+                  <th>{% translate "Details" %}</th>
                 </tr>
               </thead>
               <tbody>

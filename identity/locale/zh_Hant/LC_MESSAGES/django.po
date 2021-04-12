@@ -1,0 +1,211 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-04-11 05:54+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: common/models.py:26
+msgid "Full legacy ARC support"
+msgstr "舊式外來人口統一證號完成接受"
+
+#: common/models.py:27
+msgid "Fully accepts legacy ARC number in place of ROC ID"
+msgstr ""
+
+#: common/models.py:31
+msgid "Legacy ARC requires separate UI"
+msgstr "舊式外來人口統一證號需要單獨的UI"
+
+#: common/models.py:32
+msgid ""
+"Accepts legacy ARC number in a separate UI (passport number, for instance)"
+msgstr "舊式外來人口統一證號需要單獨的UI (例如護照號碼）"
+
+#: common/models.py:36
+msgid "No legacy ARC support"
+msgstr "不接受舊式外來人口統一證號"
+
+#: common/models.py:37
+msgid "Does not accept legacy ARC numbers"
+msgstr "不接受舊式外來人口統一證號"
+
+#: common/models.py:41
+msgid "Full new ARC support"
+msgstr "新式外來人口統一證號完成接受"
+
+#: common/models.py:42
+msgid "Fully accepts new ARC number in place of ROC ID"
+msgstr "新式外來人口統一證號完成接受"
+
+#: common/models.py:46
+msgid "New ARC requires separate UI"
+msgstr "新式外來人口統一證號需要單獨的UI"
+
+#: common/models.py:47
+msgid "Accepts new ARC number in a separate UI (passport number, for instance)"
+msgstr "新式外來人口統一證號需要單獨的UI (例如護照號碼）"
+
+#: common/models.py:51
+msgid "No new ARC support"
+msgstr "不接受新式外來人口統一證號"
+
+#: common/models.py:52
+msgid "Does not accept new ARC numbers"
+msgstr "不接受新式外來人口統一證號"
+
+#: common/models.py:56
+msgid "Full service for all users"
+msgstr "為所有用戶提供相同的服務"
+
+#: common/models.py:57
+msgid "Provides same service to all users"
+msgstr "為所有用戶提供相同的服務"
+
+#: common/models.py:61
+msgid "Some services not available to non-citizens"
+msgstr "非國民無法使用某些服務"
+
+#: common/models.py:62
+msgid "A portion of features not available to non-citizens"
+msgstr "非國民無法使用某些服務"
+
+#: common/models.py:66
+msgid "Denies service to non-citizens"
+msgstr "非國民被拒絕使用所有服務"
+
+#: common/models.py:67
+msgid "Denies all services to non-citizens"
+msgstr "非國民被拒絕使用所有服務"
+
+#: common/models.py:71
+msgid "All users may register online"
+msgstr "所有用戶都可以在線註冊"
+
+#: common/models.py:72
+msgid "All users may register online using the same process"
+msgstr "所有用戶都可以使用相同的流程在線註冊"
+
+#: common/models.py:76
+msgid "Non-citizens require offline registration"
+msgstr "非公民需要離線註冊"
+
+#: common/models.py:77
+msgid "Non-citizens require additional offline registration steps"
+msgstr "非國民需要離線註冊步驟"
+
+#: identity/settings.py:140
+msgid "Traditional Chinese"
+msgstr "整體中文"
+
+#: identity/settings.py:141
+#, fuzzy
+#| msgid "US English"
+msgid "English"
+msgstr "英文"
+
+#: templates/homepage.html:10 templates/homepage.html:36
+msgid "Inclusive Taiwan Identification Number Validation"
+msgstr "具包容性的身份驗證"
+
+#: templates/homepage.html:39
+msgid ""
+"Tools for ensuring everyone has equal access to online services and "
+"platforms."
+msgstr "確保每個台灣居民都能平等使用在線服務和平台的工具。"
+
+#: templates/homepage.html:73
+msgid "Validation API"
+msgstr "驗證API"
+
+#: templates/homepage.html:74
+msgid "Free hosted validation service"
+msgstr "免費線上的驗證服務"
+
+#: templates/homepage.html:82
+msgid "Libraries"
+msgstr "函式庫"
+
+#: templates/homepage.html:83
+msgid "Validation libraries for major software languages"
+msgstr "主要軟體語言的驗證庫"
+
+#: templates/homepage.html:91 templates/homepage.html:299
+msgid "Transparency Report"
+msgstr "透明度報告"
+
+#: templates/homepage.html:92
+msgid "See how online platforms compare"
+msgstr "查看在線服務提供商的差別"
+
+#: templates/homepage.html:105
+msgid "Hosted Validation Service"
+msgstr "線上的驗證服務"
+
+#: templates/homepage.html:107
+msgid ""
+"This ID number validation API covers all forms of legal resident ID numbers "
+"and is provided free of charge."
+msgstr "該ID號碼驗證API涵蓋所有台灣居民統一編號，並且是免費提供。"
+
+#: templates/homepage.html:110
+msgid "Example request:"
+msgstr "請求示例："
+
+#: templates/homepage.html:114
+msgid "Example response:"
+msgstr "響應示例:"
+
+#: templates/homepage.html:123
+msgid "Try it out:"
+msgstr "試試看："
+
+#: templates/homepage.html:130
+msgid "Request:"
+msgstr "請求:"
+
+#: templates/homepage.html:132
+msgid "Response:"
+msgstr "響應:"
+
+#: templates/homepage.html:142
+msgid "Validation Libraries"
+msgstr "驗證函式庫"
+
+#: templates/homepage.html:143
+msgid ""
+"These libraries cover all forms of legal resident ID numbers. Choose your "
+"language:"
+msgstr "這些庫涵蓋所有台灣居民統一編號。選擇語言："
+
+#: templates/homepage.html:300
+msgid "See how online service providers compare."
+msgstr "查看在線服務提供商的差別"
+
+#: templates/homepage.html:305
+msgid "Category"
+msgstr "類別"
+
+#: templates/homepage.html:306
+msgid "Updated"
+msgstr "更新時間"
+
+#: templates/homepage.html:307
+msgid "Score"
+msgstr "等級"
+
+#: templates/homepage.html:308
+msgid "Details"
+msgstr "詳細信息"
