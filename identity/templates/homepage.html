@@ -45,15 +45,15 @@
         {% get_available_languages as LANGUAGES %}
         {% get_language_info_list for LANGUAGES as languages %}
         {% for language in languages %}
-	{% if language.code != LANGUAGE_CODE %}
-<form action="{% url 'set_language' %}" method="post">{% csrf_token %}
-    <input name="language" type="hidden" value="{{ language.code }}">
-    <input name="next" type="hidden" value="{{ redirect_to }}">
-    <input class="btn btn-link" type="submit" value="{{ language.name_local }}">
-</form>
-	{% endif %}
-        {% endfor %}
-
+        {% if language.code != LANGUAGE_CODE %}
+        <hr class="space-sm" />
+        <form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+          <input name="language" type="hidden" value="{{ language.code }}">
+          <input name="next" type="hidden" value="{{ redirect_to }}">
+          <input class="btn btn-sm btn-link" type="submit" value="{{ language.name_local }}">
+        </form>
+        {% endif %}
+      {% endfor %}
       </div>
     </section>
     <section class="section-base">
@@ -291,7 +291,7 @@ function isValid($id_no)
 			<div class="container">
 			  <div class="row">
           <div class="col-lg-12">
-            <h2 id="translateparency-report">{% translate "Transparency Report" %}</h2>
+            <h2 id="transparency-report">{% translate "Transparency Report" %}</h2>
             <p>{% translate "See how online service providers compare." %}</p>
             <table class="report-table table table-border">
               <thead>
