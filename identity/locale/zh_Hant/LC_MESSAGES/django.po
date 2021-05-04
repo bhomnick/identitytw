@@ -19,7 +19,7 @@ msgstr ""
 
 #: common/models.py:26
 msgid "Full legacy ARC support"
-msgstr "舊式外來人口統一證號完成接受"
+msgstr "舊式外來人口統一證號完整接受"
 
 #: common/models.py:27
 msgid "Fully accepts legacy ARC number in place of ROC ID"
@@ -44,11 +44,11 @@ msgstr "不接受舊式外來人口統一證號"
 
 #: common/models.py:41
 msgid "Full new ARC support"
-msgstr "新式外來人口統一證號完成接受"
+msgstr "新式外來人口統一證號完整接受"
 
 #: common/models.py:42
 msgid "Fully accepts new ARC number in place of ROC ID"
-msgstr "新式外來人口統一證號完成接受"
+msgstr "新式外來人口統一證號完整接受"
 
 #: common/models.py:46
 msgid "New ARC requires separate UI"
@@ -68,11 +68,11 @@ msgstr "不接受新式外來人口統一證號"
 
 #: common/models.py:56
 msgid "Full service for all users"
-msgstr "為所有用戶提供相同的服務"
+msgstr "為所有使用者提供相同的服務"
 
 #: common/models.py:57
 msgid "Provides same service to all users"
-msgstr "為所有用戶提供相同的服務"
+msgstr "為所有使用者提供相同的服務"
 
 #: common/models.py:61
 msgid "Some services not available to non-citizens"
@@ -92,11 +92,11 @@ msgstr "非國民被拒絕使用所有服務"
 
 #: common/models.py:71
 msgid "All users may register online"
-msgstr "所有用戶都可以在線註冊"
+msgstr "所有使用者都可以線上註冊"
 
 #: common/models.py:72
 msgid "All users may register online using the same process"
-msgstr "所有用戶都可以使用相同的流程在線註冊"
+msgstr "所有使用者都可以使用相同的流程線上註冊"
 
 #: common/models.py:76
 msgid "Non-citizens require offline registration"
@@ -108,7 +108,7 @@ msgstr "非國民需要離線註冊步驟"
 
 #: identity/settings.py:140
 msgid "Traditional Chinese"
-msgstr "整體中文"
+msgstr "正體中文"
 
 #: identity/settings.py:141
 #, fuzzy
@@ -124,7 +124,7 @@ msgstr "具包容性的身份驗證"
 msgid ""
 "Tools for ensuring everyone has equal access to online services and "
 "platforms."
-msgstr "確保每個台灣居民都能平等使用在線服務和平台的工具。"
+msgstr "確保每個台灣居民都能平等使用線上服務和平台的工具。"
 
 #: templates/homepage.html:73
 msgid "Validation API"
@@ -148,11 +148,11 @@ msgstr "透明度報告"
 
 #: templates/homepage.html:92
 msgid "See how online platforms compare"
-msgstr "查看在線服務提供商的差別"
+msgstr "查看線上服務提供商的差別"
 
 #: templates/homepage.html:105
 msgid "Hosted Validation Service"
-msgstr "線上的驗證服務"
+msgstr "線上驗證服務"
 
 #: templates/homepage.html:107
 msgid ""
@@ -192,7 +192,7 @@ msgstr "這些庫涵蓋所有台灣居民統一編號。選擇語言："
 
 #: templates/homepage.html:300
 msgid "See how online service providers compare."
-msgstr "查看在線服務提供商的差別"
+msgstr "查看線上服務提供商的差別"
 
 #: templates/homepage.html:305
 msgid "Category"
@@ -208,4 +208,4 @@ msgstr "等級"
 
 #: templates/homepage.html:308
 msgid "Details"
-msgstr "詳細信息"
+msgstr "詳細資訊"
