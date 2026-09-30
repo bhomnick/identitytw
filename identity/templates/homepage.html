@@ -145,8 +145,8 @@
             <li><a href="#">Java</a></li>
           </ul>
           <div class="panel active">
-            <pre><code class="language-js">ID_REGEX = /^[A-Z]{1}[1-2A-D8-9]{1}[0-9]{8}$/;
-ID_LETTERS = 'ABCDEFGHJKLMNPQRSTUVXYWZIO';
+            <pre><code class="language-js">const ID_REGEX = /^[A-Z]{1}[1-2A-D8-9]{1}[0-9]{8}$/;
+const ID_LETTERS = 'ABCDEFGHJKLMNPQRSTUVXYWZIO';
 
 function isValid(id) {
   id = id.toUpperCase();
@@ -164,7 +164,7 @@ function isValid(id) {
     sum += parseInt(id[1]) * 8;
   }
 
-  for (i = 2 ; i < 9 ; i++) {
+  for (let i = 2 ; i < 9 ; i++) {
     sum += (9 - i) * parseInt(id[i]);
   }
   sum += parseInt(id[9]);
@@ -182,7 +182,7 @@ ID_LETTERS = 'ABCDEFGHJKLMNPQRSTUVXYWZIO';
 def isValid(id_no):
     id_no = id_no.upper()
     regex = re.compile(ID_REGEX)
-    if (regex.match(id_no) is None):
+    if (regex.fullmatch(id_no) is None):
         return False
 
     letterIndex = ID_LETTERS.index(id_no[0])
@@ -209,7 +209,7 @@ def isValid(id_no):
           <div class="panel">
 <pre><code class="language-php">&lt;?php
 
-define("ID_REGEX", '/^[A-Z]{1}[1-2A-D8-9]{1}[0-9]{8}$/');
+define("ID_REGEX", '/^[A-Z]{1}[1-2A-D8-9]{1}[0-9]{8}$/D');
 define("ID_LETTERS", 'ABCDEFGHJKLMNPQRSTUVXYWZIO');
 
 
@@ -252,13 +252,15 @@ function isValid($id_no)
             <h2>Coming soon</h2>
           </div>
           <div class="panel">
-<pre><code class="language-java">public class ValidId {
+<pre><code class="language-java">import java.util.Locale;
+
+public class ValidId {
 
   static final String ID_REGEX = "^[A-Z]{1}[1-2A-D8-9]{1}[0-9]{8}$";
   static final String ID_LETTERS = "ABCDEFGHJKLMNPQRSTUVXYWZIO";
 
   public static boolean isValid(String idNo) {
-    idNo = idNo.toUpperCase();
+    idNo = idNo.toUpperCase(Locale.ROOT);
 
     if (!idNo.matches(ID_REGEX)) {
       return false;
