@@ -1,4 +1,4 @@
-﻿{% load i18n %}
+{% load i18n %}
 {% load static %}
 
 <!DOCTYPE html>
@@ -145,145 +145,20 @@
             <li><a href="#">Java</a></li>
           </ul>
           <div class="panel active">
-            <pre><code class="language-js">const ID_REGEX = /^[A-Z]{1}[1-2A-D8-9]{1}[0-9]{8}$/;
-const ID_LETTERS = 'ABCDEFGHJKLMNPQRSTUVXYWZIO';
-
-function isValid(id) {
-  id = id.toUpperCase();
-  if (!ID_REGEX.test(id)) {
-    return false;
-  }
-  
-  let letterIndex = ID_LETTERS.indexOf(id[0]);
-  let sum = Math.floor(letterIndex / 10 + 1) + (letterIndex * 9);
-
-  // Legacy ARC 
-  if ((/[A-Z]/).test(id[1])) {
-    sum += (ID_LETTERS.indexOf(id[1]) % 10) * 8;
-  } else {
-    sum += parseInt(id[1]) * 8;
-  }
-
-  for (let i = 2 ; i < 9 ; i++) {
-    sum += (9 - i) * parseInt(id[i]);
-  }
-  sum += parseInt(id[9]);
-
-  return sum % 10 === 0;
-}</code></pre>
+            <pre><code class="language-js">{{ snippets.javascript }}</code></pre>
           </div>
           <div class="panel">
-<pre><code class="language-python">import math
-import re
-
-ID_REGEX = '^[A-Z]{1}[1-2A-D8-9]{1}[0-9]{8}$';
-ID_LETTERS = 'ABCDEFGHJKLMNPQRSTUVXYWZIO';
-
-def isValid(id_no):
-    id_no = id_no.upper()
-    regex = re.compile(ID_REGEX)
-    if (regex.fullmatch(id_no) is None):
-        return False
-
-    letterIndex = ID_LETTERS.index(id_no[0])
-    checksum = math.floor(letterIndex / 10 + 1) + (letterIndex * 9)
-
-    # Legacy ARC
-    if (re.match('[A-Z]', id_no[1])):
-        checksum = checksum + (ID_LETTERS.index(id_no[1]) % 10) * 8;
-    else:
-        checksum = checksum + int(id_no[1]) * 8
-
-    for position in range(2, 9):
-        checksum = checksum + (9 - position) * int(id_no[position])
-
-    checksum = checksum + int(id_no[9])
-
-    if (checksum % 10) == 0:
-        return True
-    else:
-        return False
-</code></pre>
+<pre><code class="language-python">{{ snippets.python }}</code></pre>
 
           </div>
           <div class="panel">
-<pre><code class="language-php">&lt;?php
-
-define("ID_REGEX", '/^[A-Z]{1}[1-2A-D8-9]{1}[0-9]{8}$/D');
-define("ID_LETTERS", 'ABCDEFGHJKLMNPQRSTUVXYWZIO');
-
-
-function isValid($id_no)
-{
-
-  $id_no = strtoupper($id_no);
-  if (preg_match(ID_REGEX, $id_no) != 1)
-  {
-    return false;
-  }
-
-  $letterIndex = strpos(ID_LETTERS, $id_no[0]);
-  $checksum = floor($letterIndex / 10 + 1) + ($letterIndex * 9);
-
-  // Legacy ARC
-  if (preg_match('/[A-Z]/', $id_no[1]) == 1)
-  {
-    $checksum += (strpos(ID_LETTERS, $id_no[1]) % 10) * 8;
-  } else {
-    $checksum += intval($id_no[1]) * 8;
-  }
-  
-  for ($i = 2 ; $i < 9 ; $i++) { 
-    $checksum += (9 - $i) * intval($id_no[$i]);
-  }
-  $checksum += intval($id_no[9]);
-
-  if (($checksum % 10) == 0){
-    return true;
-  } else {
-    return false;
-  }
-
-}
-?>
-</code></pre>
+<pre><code class="language-php">{{ snippets.php }}</code></pre>
           </div>
           <div class="panel">
             <h2>Coming soon</h2>
           </div>
           <div class="panel">
-<pre><code class="language-java">import java.util.Locale;
-
-public class ValidId {
-
-  static final String ID_REGEX = "^[A-Z]{1}[1-2A-D8-9]{1}[0-9]{8}$";
-  static final String ID_LETTERS = "ABCDEFGHJKLMNPQRSTUVXYWZIO";
-
-  public static boolean isValid(String idNo) {
-    idNo = idNo.toUpperCase(Locale.ROOT);
-
-    if (!idNo.matches(ID_REGEX)) {
-      return false;
-    }
-
-    int letterIndex = ID_LETTERS.indexOf(idNo.charAt(0));
-    int checksum = (int) Math.floor(letterIndex / 10 + 1) + (letterIndex * 9);
-  
-    // Legacy ARC
-    if (Character.isLetter(idNo.charAt(1))) {
-      checksum += (ID_LETTERS.indexOf(idNo.charAt(1)) % 10) * 8;
-    } else {
-      checksum += Character.getNumericValue(idNo.charAt(1)) * 8;
-    }
-
-    for (int i = 2 ; i < 9 ; i++) {
-      checksum += (9 - i) * Character.getNumericValue(idNo.charAt(i));
-    }
-    checksum += Character.getNumericValue(idNo.charAt(9));
- 
-    return checksum % 10 == 0;
-  }
-}</code></pre>
+<pre><code class="language-java">{{ snippets.java }}</code></pre>
 
           </div>
         </div>
@@ -335,7 +210,6 @@ public class ValidId {
     <div class="footer-bar">
       <div class="container">
         <span>© 2020 Ben Homnick</span>
-        <!--<span><img src="{% static 'media/logo-light.svg' %}" /></span>-->
       </div>
     </div>
     <link rel="stylesheet" href="{% static 'media/icons/iconsmind/line-icons.min.css' %}">
