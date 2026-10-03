@@ -1,0 +1,8 @@
+name: "E-Invoice Platform"
+url: "https://www.einvoice.nat.gov.tw/APCONSUMER/BTC251W/"
+category: government
+legacy_arc: none
+new_arc: full
+service: full
+registration: online
+updated: 2021-08-25

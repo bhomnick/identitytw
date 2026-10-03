@@ -1,0 +1,8 @@
+name: "Taipei Pass"
+url: "https://id.taipei/tpcd/registration/premium"
+category: government
+legacy_arc: separate
+new_arc: separate
+service: partial
+registration: online
+updated: 2021-05-16

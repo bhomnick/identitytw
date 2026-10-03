@@ -1,0 +1,8 @@
+name: "New Taipei City Police Traffic Offense Report"
+url: "https://tvrs.ntpd.gov.tw/#events/index"
+category: government
+legacy_arc: separate
+new_arc: none
+service: full
+registration: offline
+updated: 2021-06-24

@@ -1,0 +1,16 @@
+        <p>{{ _('Each implementation accepts all three formats and is tested against the same set of IDs on every change. Copy the one for your language.') }}</p>
+        <div class="tabs">
+          <div role="tablist" aria-label="{{ _('Programming language') }}">
+            {% for language, snippet in snippets.items() %}
+            <button role="tab" id="tab-{{ language }}" aria-controls="panel-{{ language }}" aria-selected="{{ 'true' if loop.first else 'false' }}" tabindex="{{ 0 if loop.first else -1 }}">{{ snippet.title }}</button>
+            {% endfor %}
+          </div>
+          <div class="panels">
+            {% for language, snippet in snippets.items() %}
+            <div role="tabpanel" id="panel-{{ language }}" aria-labelledby="tab-{{ language }}"{% if not loop.first %} hidden{% endif %}>
+              {{ snippet.html }}
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+        <p class="muted"><a href="{{ repo_url }}/tree/master/validator">{{ _('Source and tests on GitHub') }}</a></p>

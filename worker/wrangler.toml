@@ -1,15 +1,15 @@
 # Cloudflare Worker for https://v.identity.tw
 #
-# `name` must match the Worker that already serves v.identity.tw (see
-# Workers & Pages in the Cloudflare dashboard), otherwise the first deploy
-# creates a second Worker instead of replacing the existing one.
-name = "identity-validator"
+# `name` is the Worker that has served v.identity.tw since 2021, so deploys
+# replace it in place. It is attached with a zone route (not a custom
+# domain); the proxied DNS record for v.identity.tw stays as it is.
+name = "green-shape-e78d"
 main = "src/index.js"
 compatibility_date = "2025-09-01"
 
-# Serve only on the custom domain, not on *.workers.dev.
+# Serve only on the route, not on *.workers.dev.
 workers_dev = false
 
 [[routes]]
-pattern = "v.identity.tw"
-custom_domain = true
+pattern = "v.identity.tw/*"
+zone_name = "identity.tw"

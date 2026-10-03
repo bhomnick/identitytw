@@ -4,33 +4,50 @@ on:
   push:
     branches: [master]
   pull_request:
+  schedule:
+    - cron: '17 3 * * 1'   # weekly: re-run everything and check the live site
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# One run per branch. Pull request runs are superseded by newer pushes;
+# master runs queue so a deploy is never cancelled half-way.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+env:
+  API_URL: https://v.identity.tw
 
 jobs:
   site:
-    name: Django site
+    name: Static site
     runs-on: ubuntu-latest
-    env:
-      SECRET_KEY: ci-only-not-a-secret
-      DEBUG: "false"
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # provider pages show git history
       - uses: actions/setup-python@v5
         with:
           python-version-file: .python-version
           cache: pip
-      - run: sudo apt-get update && sudo apt-get install -y gettext
       - run: pip install -r requirements.txt
-      - name: Deployment checks
-        run: python manage.py check --deploy
-        env:
-          USE_SSL: "true"
-      - name: Migrations are up to date
-        run: python manage.py makemigrations --check --dry-run
-      - name: Translations compile
-        run: python manage.py compilemessages
-      - name: Static files collect (catches broken asset references)
-        run: python manage.py collectstatic --noinput
-      - run: python manage.py test common --verbosity 2
+      - run: python -m unittest discover -s web -p 'test_*.py' --verbose
+      - name: Site worker tests (language negotiation, redirects)
+        run: node --test
+        working-directory: web
+      - run: python web/build.py
+      - name: Smoke test the build locally
+        run: |
+          python -m http.server --directory web/dist 8000 &
+          sleep 1
+          .github/scripts/smoke.sh --site http://127.0.0.1:8000
+      - uses: actions/upload-artifact@v4
+        with:
+          name: site
+          path: web/dist
+          retention-days: 14
 
   validator:
     name: Validator implementations
@@ -47,8 +64,17 @@ jobs:
         with:
           distribution: temurin
           java-version: 21
-      - run: php --version
-      - run: ./validator/test.sh
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: validator/go/go.mod
+      - name: Toolchain versions
+        run: |
+          python3 --version
+          node --version
+          php --version | head -1
+          java -version 2>&1 | head -1
+          go version
+      - run: ./validator/test.sh   # every language; a missing toolchain fails the job
 
   worker:
     name: Cloudflare Worker
@@ -68,29 +94,111 @@ jobs:
       - name: Bundle with wrangler (dry run)
         run: npm run check
 
-  deploy-worker:
-    name: Deploy Worker to Cloudflare
-    needs: [validator, worker]
-    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+  preview:
+    name: Preview deploy
+    needs: [site]
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: worker
+    permissions:
+      contents: read
+      pull-requests: write
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: site
+          path: web/dist
       - uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
           cache-dependency-path: worker/package-lock.json
       - run: npm ci
-      - name: wrangler deploy
+        working-directory: worker
+      - name: Upload a preview version of the site
+        id: deploy
+        working-directory: worker
         env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          MESSAGE: "PR #${{ github.event.pull_request.number }} ${{ github.event.pull_request.head.sha }}"
         run: |
           if [ -z "$CLOUDFLARE_API_TOKEN" ] || [ -z "$CLOUDFLARE_ACCOUNT_ID" ]; then
-            echo "::notice::CLOUDFLARE_API_TOKEN / CLOUDFLARE_ACCOUNT_ID secrets are not set; skipping deploy."
+            echo "::warning::Cloudflare secrets are not set; no preview deployed."
+            exit 0
+          fi
+          npx wrangler versions upload -c ../web/wrangler.toml --message "$MESSAGE" | tee deploy.log
+          url="$(grep -oE 'https://[a-z0-9-]+\.[a-z0-9-]+\.workers\.dev' deploy.log | head -1)"
+          [ -n "$url" ] || { echo "::error::could not find the preview URL in wrangler output"; exit 1; }
+          echo "url=$url" >> "$GITHUB_OUTPUT"
+      - name: Smoke test the preview
+        if: steps.deploy.outputs.url != ''
+        run: .github/scripts/smoke.sh --site "${{ steps.deploy.outputs.url }}"
+      - name: Comment the preview URL on the pull request
+        if: steps.deploy.outputs.url != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ github.event.pull_request.number }}
+          URL: ${{ steps.deploy.outputs.url }}
+          SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          body="Preview: $URL (built from $SHA)"
+          gh pr comment "$PR" --edit-last --body "$body" || gh pr comment "$PR" --body "$body"
+
+  deploy:
+    name: Deploy to Cloudflare
+    needs: [site, validator, worker]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    concurrency:
+      group: deploy-production
+      cancel-in-progress: false
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      SITE_URL: ${{ vars.SITE_URL || 'https://identitytw.bhomnick.workers.dev' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4   # deploy exactly what the site job tested
+        with:
+          name: site
+          path: web/dist
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: worker/package-lock.json
+      - run: npm ci
+        working-directory: worker
+      - name: Deploy the API worker
+        id: worker
+        working-directory: worker
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ] || [ -z "$CLOUDFLARE_ACCOUNT_ID" ]; then
+            echo "::warning::Cloudflare secrets are not set; the worker was NOT deployed."
+            echo "skipped=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
           npx wrangler deploy
+      - name: Deploy the site
+        id: site
+        working-directory: worker
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ] || [ -z "$CLOUDFLARE_ACCOUNT_ID" ]; then
+            echo "::warning::Cloudflare secrets are not set; the site was NOT deployed."
+            echo "skipped=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          npx wrangler deploy -c ../web/wrangler.toml
+      - name: Verify the live site and API
+        if: steps.site.outputs.skipped != 'true'
+        run: .github/scripts/smoke.sh --site "$SITE_URL" --api "$API_URL"
+
+  health:
+    name: Live site health check
+    if: (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch') && vars.SITE_URL != ''
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: .github/scripts/smoke.sh --site "${{ vars.SITE_URL }}" --api "$API_URL"

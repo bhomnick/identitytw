@@ -1,0 +1,66 @@
+        <h2>{{ _('Transparency Report') }}</h2>
+        <p class="lead">{{ _('Each service is scored on whether it accepts legacy and new ARC numbers, offers the same service to non-citizens, and lets them register online. Click a service for the full breakdown and its history.') }}</p>
+        <p>{{ _('Found a service that rejects your ARC number, or one that has fixed it?') }} <a href="{{ repo_url }}/issues/new">{{ _('Report it on GitHub') }}</a>.</p>
+        {% if report_stats %}
+        {% include 'partials/stats.html' %}
+        {% endif %}
+        <div class="filters">
+          <label class="muted" for="report-search">{{ _('Search') }}</label>
+          <input id="report-search" type="search" placeholder="{{ _('Service name') }}" autocomplete="off">
+          <label class="muted" for="report-category">{{ _('Category') }}</label>
+          <select id="report-category">
+            <option value="">{{ _('All categories') }}</option>
+            {% for slug, names in categories.items() %}
+            <option value="{{ slug }}">{{ names[lang.code] }}</option>
+            {% endfor %}
+          </select>
+          <label class="muted" for="report-sort">{{ _('Sort') }}</label>
+          <select id="report-sort">
+            <option value="name">{{ _('Name') }}</option>
+            <option value="category">{{ _('Category') }}</option>
+            <option value="best">{{ _('Best first') }}</option>
+            <option value="worst">{{ _('Worst first') }}</option>
+            <option value="updated">{{ _('Recently checked') }}</option>
+          </select>
+          <span class="count" id="report-count" aria-live="polite"></span>
+        </div>
+        <p class="legend">
+          <span class="mark mark-good" aria-hidden="true">✓</span> {{ _('Full support') }}
+          <span class="mark mark-warn" aria-hidden="true">!</span> {{ _('Partial, or a separate process') }}
+          <span class="mark mark-bad" aria-hidden="true">✕</span> {{ _('Not supported') }}
+        </p>
+        <div class="table-wrap">
+          <table class="report-table">
+            <thead>
+              <tr>
+                <th scope="col" data-sort="name" aria-sort="ascending"><button type="button" class="sort-button">{{ _('Service') }}</button></th>
+                <th scope="col" data-sort="category"><button type="button" class="sort-button">{{ _('Category') }}</button></th>
+                <th scope="col" class="grade-head" data-sort="score"><button type="button" class="sort-button">{{ _('Grade') }}</button></th>
+                {% for criterion in criteria %}
+                <th scope="col" class="mark-head" data-sort="{{ criterion.key }}"><button type="button" class="sort-button">{{ _(criterion.heading) }}</button></th>
+                {% endfor %}
+                <th scope="col" data-sort="updated"><button type="button" class="sort-button">{{ _('Updated') }}</button></th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for provider in providers %}
+              <tr data-name="{{ provider.name | lower }}" data-category="{{ provider.category }}" data-category-name="{{ category_name(provider.category) }}" data-score="{{ provider.score }}" data-updated="{{ provider.updated.isoformat() }}"{% for c in provider.criteria %} data-{{ c.key.replace('_', '-') }}="{{ c.points }}"{% endfor %}>
+                <td class="name"><a href="{{ index_url }}providers/{{ provider.slug }}/">{{ provider.name }}</a></td>
+                <td class="category">{{ category_name(provider.category) }}</td>
+                <td class="grade-cell"><span class="grade grade-{{ provider.grade_class }}">{{ provider.grade }}</span></td>
+                {% for criterion in provider.criteria %}
+                <td class="mark-cell" data-label="{{ _(criterion.heading) }}">
+                  <span class="mark mark-{{ criterion.level }}" title="{{ _(criterion.short) }}"><span aria-hidden="true">{% if criterion.level == 'good' %}✓{% elif criterion.level == 'warn' %}!{% else %}✕{% endif %}</span><span class="sr-only">{{ _(criterion.short) }}</span></span>
+                </td>
+                {% endfor %}
+                <td class="nowrap updated" data-label="{{ _('Updated') }}">{{ provider.updated.isoformat() }}</td>
+              </tr>
+              {% endfor %}
+              <tr class="empty" hidden><td colspan="8">{{ _('No services match.') }}</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="muted">
+          <a href="/providers.json">{{ _('Download the data as JSON') }}</a> ·
+          <a href="{{ repo_url }}/tree/master/web/data/providers">{{ _('Edit the data on GitHub') }}</a>
+        </p>

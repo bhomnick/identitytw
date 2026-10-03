@@ -1,0 +1,8 @@
+name: "Kaohsiung City Police Traffic Offense Report"
+url: "https://policemail.kmph.gov.tw/Mail.aspx?s=vcVQ6srNJSVOy9ybh4WCkw%3d%3d"
+category: government
+legacy_arc: separate
+new_arc: separate
+service: full
+registration: online
+updated: 2021-04-05

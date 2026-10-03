@@ -1,0 +1,8 @@
+name: "Cathay United Bank CUBE app"
+url: "https://play.google.com/store/apps/details?id=com.cathaybk.mymobibank.android&hl=en&gl=US&pli=1"
+category: finance
+legacy_arc: none
+new_arc: none
+service: partial
+registration: offline
+updated: 2023-04-29

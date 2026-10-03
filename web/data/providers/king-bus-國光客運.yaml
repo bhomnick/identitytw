@@ -1,0 +1,8 @@
+name: "King Bus (國光客運)"
+url: "https://order.kingbus.com.tw/ORD/ORD_M_1510_OrderGo.aspx"
+category: transportation
+legacy_arc: full
+new_arc: separate
+service: partial
+registration: online
+updated: 2023-04-10

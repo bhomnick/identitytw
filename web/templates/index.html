@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}{{ _('Which online services in Taiwan accept resident ID numbers?') }}{% endblock %}
+{% block description %}{{ _('A public scorecard of how Taiwanese online services treat ARC holders, plus free validation code that accepts every legal ID number format.') }}{% endblock %}
+{% block content %}
+{% set hero_stats = true %}
+{% include 'partials/hero.html' %}
+
+    <section id="report">
+      <div class="container">
+{% include 'partials/report.html' %}
+{% include 'partials/methodology.html' %}
+      </div>
+    </section>
+
+    <section id="developers" class="band">
+      <div class="container">
+        <h2>{{ _('For developers') }}</h2>
+{% include 'partials/formats.html' %}
+        <h3 id="validation-libraries">{{ _('Validation code') }}</h3>
+{% include 'partials/code.html' %}
+{% include 'partials/api.html' %}
+      </div>
+    </section>
+{% endblock %}

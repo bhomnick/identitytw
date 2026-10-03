@@ -1,0 +1,8 @@
+name: "EZPost"
+url: "https://ezpost.post.gov.tw"
+category: government
+legacy_arc: separate
+new_arc: separate
+service: full
+registration: online
+updated: 2022-01-18

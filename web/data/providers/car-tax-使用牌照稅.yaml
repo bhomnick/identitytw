@@ -1,0 +1,8 @@
+name: "Car Tax - 使用牌照稅"
+url: "https://paytax.nat.gov.tw/Main4.aspx?opt=4"
+category: government
+legacy_arc: full
+new_arc: none
+service: partial
+registration: offline
+updated: 2022-04-12

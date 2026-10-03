@@ -1,8 +1,28 @@
 {
-  "name": "taiwan-id-validator",
-  "private": true,
+  "name": "validate-taiwan-id",
+  "version": "1.0.0",
+  "description": "Validate Taiwan ID numbers: national IDs, legacy ARC numbers and the ARC format issued since 2021.",
   "type": "module",
+  "main": "taiwan_id.js",
+  "exports": "./taiwan_id.js",
+  "files": [
+    "taiwan_id.js"
+  ],
   "scripts": {
     "test": "node --test"
-  }
+  },
+  "keywords": [
+    "taiwan",
+    "id",
+    "arc",
+    "validation",
+    "national-id"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bhomnick/identitytw.git",
+    "directory": "validator/javascript"
+  },
+  "homepage": "https://identity.tw",
+  "license": "MIT"
 }

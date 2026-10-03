@@ -1,0 +1,26 @@
+# Categories for the transparency report. The key is what provider files
+# reference in their `category` field; names are shown per language.
+finance:
+  en: Finance
+  zh-Hant: 金融
+government:
+  en: Government
+  zh-Hant: 政府
+transportation:
+  en: Transportation
+  zh-Hant: 交通
+entertainment:
+  en: Entertainment
+  zh-Hant: 娛樂
+retail:
+  en: Retail
+  zh-Hant: 零售
+internet:
+  en: Internet
+  zh-Hant: 網路服務
+health:
+  en: Health
+  zh-Hant: 醫療
+communication:
+  en: Communication
+  zh-Hant: 電信

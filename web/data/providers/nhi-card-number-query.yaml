@@ -1,0 +1,8 @@
+name: "NHI Card Number Query"
+url: "https://cloudicweb.nhi.gov.tw/edesk/AP/NhiCardQuery.aspx"
+category: government
+legacy_arc: none
+new_arc: none
+service: none
+registration: offline
+updated: 2021-07-13

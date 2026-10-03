@@ -1,0 +1,8 @@
+name: "Taishin Creditcard Gift"
+url: "https://www.taishinbank.com.tw/eService/CreditCardAP/gifInquiry/gifInquiry.jsp"
+category: finance
+legacy_arc: full
+new_arc: none
+service: full
+registration: online
+updated: 2026-08-29

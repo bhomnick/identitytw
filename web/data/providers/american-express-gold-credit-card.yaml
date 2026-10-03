@@ -1,0 +1,8 @@
+name: "American Express Gold Credit Card"
+url: "https://www.americanexpress.com/zh-tw/credit-cards/grcc-gold/?linknav=tw-amex-cardshop-allcards-text-GrccGold"
+category: finance
+legacy_arc: full
+new_arc: full
+service: full
+registration: online
+updated: 2022-05-11

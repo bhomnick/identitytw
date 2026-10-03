@@ -1,0 +1,8 @@
+name: "Sony Online Store"
+url: "https://www.sony.com.tw/corporate/mysony/Member/AddMember"
+category: retail
+legacy_arc: full
+new_arc: full
+service: full
+registration: online
+updated: 2025-06-27

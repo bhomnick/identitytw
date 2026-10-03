@@ -1,0 +1,8 @@
+name: "Taichung City Police Traffic Report"
+url: "https://suggest.police.taichung.gov.tw/traffic/traffic_write.jsp"
+category: government
+legacy_arc: separate
+new_arc: separate
+service: full
+registration: online
+updated: 2024-09-18

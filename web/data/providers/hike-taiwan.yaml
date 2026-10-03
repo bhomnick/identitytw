@@ -1,0 +1,8 @@
+name: "Hike Taiwan"
+url: "https://hike.taiwan.gov.tw/Apply"
+category: government
+legacy_arc: separate
+new_arc: separate
+service: full
+registration: online
+updated: 2021-04-05

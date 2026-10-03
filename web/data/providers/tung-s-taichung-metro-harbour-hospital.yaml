@@ -1,0 +1,8 @@
+name: "Tung’s Taichung Metro Harbour Hospital"
+url: "http://rg.sltung.com.tw/EM/QLogin.aspx"
+category: health
+legacy_arc: none
+new_arc: none
+service: partial
+registration: offline
+updated: 2021-05-04

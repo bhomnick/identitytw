@@ -1,0 +1,8 @@
+name: "Taiwan HSR"
+url: "https://www.thsrc.com.tw/"
+category: transportation
+legacy_arc: separate
+new_arc: separate
+service: partial
+registration: online
+updated: 2026-08-29

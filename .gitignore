@@ -131,7 +131,8 @@ dmypy.json
 .DS_Store
 
 # Project
-identity/staticfiles/
+web/dist/
 node_modules/
-worker/.wrangler/
+.wrangler/
 worker/dist/
+validator/java/out/

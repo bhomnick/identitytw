@@ -1,0 +1,8 @@
+name: "Lohas Signup"
+url: "https://signup.lohasnet.tw"
+category: internet
+legacy_arc: separate
+new_arc: separate
+service: full
+registration: online
+updated: 2022-05-14

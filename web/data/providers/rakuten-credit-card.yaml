@@ -1,0 +1,8 @@
+name: "Rakuten Credit Card"
+url: "https://www.card.rakuten.com.tw/corp/product/"
+category: finance
+legacy_arc: full
+new_arc: full
+service: full
+registration: online
+updated: 2023-10-16

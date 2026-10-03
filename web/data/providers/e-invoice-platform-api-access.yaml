@@ -1,0 +1,8 @@
+name: "E-Invoice Platform API Access"
+url: "https://www.einvoice.nat.gov.tw/APCONSUMER/BTC605W/"
+category: government
+legacy_arc: none
+new_arc: none
+service: none
+registration: offline
+updated: 2022-02-27

@@ -1,0 +1,16 @@
+    <section class="hero">
+      <div class="container">
+        <div>
+          <h1>{{ _('Which online services in Taiwan accept resident ID numbers?') }}</h1>
+          <p class="lead">{{ _('Foreign residents hold an Alien Resident Certificate (ARC) number instead of a national ID. Many websites reject it. This site scores %(count)s services on how they treat ARC holders, and gives developers the code to fix theirs.', count=stats.total) }}</p>
+          <div class="actions">
+            <a class="button" href="#report">{{ _('See the report') }}</a>
+            <a class="button secondary" href="#developers">{{ _('Fix your validator') }}</a>
+          </div>
+        </div>
+        <div class="art" aria-hidden="true"></div>
+        {% if hero_stats %}
+        {% include 'partials/stats.html' %}
+        {% endif %}
+      </div>
+    </section>

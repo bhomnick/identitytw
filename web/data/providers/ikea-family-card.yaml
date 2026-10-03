@@ -1,0 +1,8 @@
+name: "Ikea Family Card"
+url: "https://www.ikeacard.com.tw/form_page?CTA=PC_Menu"
+category: retail
+legacy_arc: separate
+new_arc: separate
+service: partial
+registration: online
+updated: 2022-10-04

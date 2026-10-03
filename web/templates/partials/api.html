@@ -1,0 +1,25 @@
+        <div class="two-col">
+          <div>
+            <h2 id="validation-service">{{ _('Hosted Validation Service') }}</h2>
+            <p>{{ _('This ID number validation API covers all forms of legal resident ID numbers and is provided free of charge.') }}</p>
+            <p>{{ _('It is a demo for trying the algorithm. In production, use the code on this page so that ID numbers never leave your own systems. Nothing sent to this endpoint is logged.') }}</p>
+            <h3>{{ _('Example request:') }}</h3>
+            <pre><code>GET {{ api_url }}/?id=A123456789</code></pre>
+            <h3>{{ _('Example response:') }}</h3>
+            {{ example_response }}
+          </div>
+          <div class="try-it">
+            <h3>{{ _('Try it out:') }}</h3>
+            <form id="api-form" data-api-url="{{ api_url }}/?id=">
+              <label class="muted" for="api-id">{{ _('ID number') }}</label>
+              <input id="api-id" name="id" placeholder="A123456789" autocomplete="off" spellcheck="false">
+              <button class="button" type="submit" id="api-submit" disabled>{{ _('Submit') }}</button>
+            </form>
+            <div id="api-example" hidden>
+              <h4>{{ _('Request:') }}</h4>
+              <pre><code id="api-request"></code></pre>
+              <h4>{{ _('Response:') }}</h4>
+              <pre><code id="api-response"></code></pre>
+            </div>
+          </div>
+        </div>

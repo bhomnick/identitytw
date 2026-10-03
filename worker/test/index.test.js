@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
-import { handleRequest } from '../src/index.js';
+import worker, { handleRequest } from '../src/index.js';
 
 const BASE = 'https://v.identity.tw';
 
@@ -63,4 +63,10 @@ test('CORS preflight', async () => {
   assert.equal(text, '');
   assert.equal(response.headers.get('access-control-allow-origin'), '*');
   assert.match(response.headers.get('access-control-allow-methods'), /GET/);
+});
+
+test('default export is what Cloudflare calls', async () => {
+  const response = await worker.fetch(new Request(BASE + '/?id=A123456789'));
+  assert.equal(response.status, 200);
+  assert.deepEqual(await response.json(), { id: 'A123456789', valid: true });
 });

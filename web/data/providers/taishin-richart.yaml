@@ -1,0 +1,8 @@
+name: "Taishin Richart"
+url: "https://play.google.com/store/apps/details?id=tw.com.taishinbank.richart"
+category: finance
+legacy_arc: separate
+new_arc: separate
+service: partial
+registration: offline
+updated: 2023-03-14

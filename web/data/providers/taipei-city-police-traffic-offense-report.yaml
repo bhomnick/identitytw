@@ -1,0 +1,8 @@
+name: "Taipei City Police Traffic Offense Report"
+url: "https://prsweb.tcpd.gov.tw/#/New"
+category: government
+legacy_arc: full
+new_arc: none
+service: full
+registration: online
+updated: 2021-06-24

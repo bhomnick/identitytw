@@ -1,0 +1,18 @@
+        <p class="lead">{{ _('Taiwan has three ID number formats. They share one check digit algorithm and differ only in the second character. A validator that only allows 1 or 2 there rejects every foreign resident.') }}</p>
+        <div class="table-wrap">
+          <table class="formats">
+            <thead>
+              <tr>
+                <th scope="col">{{ _('Format') }}</th>
+                <th scope="col">{{ _('Example') }}</th>
+                <th scope="col">{{ _('Second character') }}</th>
+                <th scope="col">{{ _('Issued to') }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>{{ _('National ID') }}</td><td><code>A123456789</code></td><td><code>1</code> {{ _('or') }} <code>2</code></td><td>{{ _('Citizens') }}</td></tr>
+              <tr><td>{{ _('Legacy ARC number') }}</td><td><code>AB12345677</code></td><td><code>A</code> – <code>D</code></td><td>{{ _('Foreign residents, before 2021') }}</td></tr>
+              <tr><td>{{ _('New ARC number') }}</td><td><code>A800000014</code></td><td><code>8</code> {{ _('or') }} <code>9</code></td><td>{{ _('Foreign residents, since January 2021') }}</td></tr>
+            </tbody>
+          </table>
+        </div>
