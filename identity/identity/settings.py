@@ -1,25 +1,25 @@
 from pathlib import Path
-from django.utils.translation import gettext_lazy as _
 
 import environ
+from django.utils.translation import gettext_lazy as _
 
+
+BASE_DIR = Path(__file__).resolve().parent.parent  # identity/
+REPO_DIR = BASE_DIR.parent
 
 env = environ.Env()
-environ.Env.read_env('.env')
-
-
-BASE_DIR = Path(__file__).resolve().parent.parent
+environ.Env.read_env(REPO_DIR / '.env')
 
 SECRET_KEY = env('SECRET_KEY')
 
-DEBUG = TEMPLATE_DEBUG = env.bool('DEBUG', default=False)
+DEBUG = env.bool('DEBUG', default=False)
 
-ALLOWED_HOSTS = [
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=[
     'localhost',
     '127.0.0.1',
     'identitytw.herokuapp.com',
-    'identity.tw'
-]
+    'identity.tw',
+])
 
 
 # Application definition
@@ -32,15 +32,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # 3rd party
-    'django_object_actions',
-
     # Project
     'common',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -50,36 +48,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'common.middleware.HerokuRedirectMiddleware',
 ]
-
-# DB
-
-if DEBUG:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
-else:
-    DATABASES = {
-        'default': env.db()
-    }
-
-
-# Heroku
-
-HEROKU_APP = env('HEROKU_APP', default=None)
-HEROKU_DOMAIN = env('HEROKU_DOMAIN', default=None)
-
-
-# SSL
-
-USE_SSL = env.bool('USE_SSL', default=False)
-
-if USE_SSL:
-    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-    SECURE_SSL_REDIRECT = True
-
 
 ROOT_URLCONF = 'identity.urls'
 
@@ -100,6 +68,39 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'identity.wsgi.application'
+
+
+# Database
+# DATABASE_URL is set by Heroku Postgres in production; local development
+# falls back to SQLite.
+
+DATABASES = {
+    'default': env.db(default=f'sqlite:///{BASE_DIR / "db.sqlite3"}'),
+}
+
+# The existing tables were created with 32-bit integer primary keys.
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
+
+# Heroku
+# When both are set, requests to <HEROKU_APP>.herokuapp.com are redirected
+# to HEROKU_DOMAIN. See common.middleware.HerokuRedirectMiddleware.
+
+HEROKU_APP = env('HEROKU_APP', default=None)
+HEROKU_DOMAIN = env('HEROKU_DOMAIN', default=None)
+
+
+# HTTPS
+# Set USE_SSL=true in production (behind a proxy that sets X-Forwarded-Proto).
+
+USE_SSL = env.bool('USE_SSL', default=False)
+
+if USE_SSL:
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_HSTS_SECONDS = 60 * 60 * 24 * 365
 
 
 # Password validation
@@ -128,13 +129,9 @@ TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
-USE_L10N = True
-
 USE_TZ = True
 
-LOCALE_PATHS = (
-    BASE_DIR / 'locale',
-)
+LOCALE_PATHS = [BASE_DIR / 'locale']
 
 LANGUAGES = [
     ('zh-hant', _('Traditional Chinese')),
@@ -142,48 +139,25 @@ LANGUAGES = [
 ]
 
 
-# Media
-
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
-
-
-# Flickr
-
-FLICKR_KEY = env('FLICKR_KEY', default='')
-FLICKR_SECRET = env('FLICKR_SECRET', default='')
-
-
-# Static files
+# Static files, served by WhiteNoise
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-# Tagging
+STORAGES = {
+    'default': {
+        'BACKEND': 'django.core.files.storage.FileSystemStorage',
+    },
+    'staticfiles': {
+        'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage',
+    },
+}
 
-TAGGIT_CASE_INSENSITIVE = True
 
+# Validator reference implementations shown on the homepage
 
-# AWS
-
-USE_S3 = env.bool('USE_S3', default=False)
-
-if USE_S3:
-    AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID', default='')
-    AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY', default='')
-    AWS_STORAGE_BUCKET_NAME = env('AWS_STORAGE_BUCKET_NAME', default='')
-    AWS_DEFAULT_ACL = 'public-read'
-    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
-    AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
-
-    STATIC_LOCATION = 'static'
-    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATIC_LOCATION}/'
-    STATICFILES_STORAGE = 'common.storage_backends.StaticRootS3Boto3Storage'
-
-    PUBLIC_MEDIA_LOCATION = 'media'
-    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{PUBLIC_MEDIA_LOCATION}/'
-    DEFAULT_FILE_STORAGE = 'common.storage_backends.MediaRootS3Boto3Storage'
-
+VALIDATOR_DIR = REPO_DIR / 'validator'
 
 
 # Logging
