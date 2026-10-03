@@ -34,6 +34,9 @@ jobs:
           cache: pip
       - run: pip install -r requirements.txt
       - run: python -m unittest discover -s web -p 'test_*.py' --verbose
+      - name: Site worker tests (language negotiation, redirects)
+        run: node --test
+        working-directory: web
       - run: python web/build.py
       - name: Smoke test the build locally
         run: |

@@ -10,6 +10,12 @@
   <link rel="alternate" hreflang="{{ alt.code }}" href="{{ site_url }}{{ alt.url }}">
   {% endfor %}
   <link rel="alternate" hreflang="x-default" href="{{ site_url }}{{ alternates[0].url }}">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="identity.tw">
+  <meta property="og:title" content="{% block og_title %}{{ self.title() }}{% endblock %}">
+  <meta property="og:description" content="{{ self.description() }}">
+  <meta property="og:url" content="{{ site_url }}{{ page_url }}">
+  <meta property="og:locale" content="{{ 'zh_TW' if lang.code == 'zh-Hant' else 'en_US' }}">
   <meta name="color-scheme" content="light">
   <link rel="stylesheet" href="/static/site.css">
   <link rel="stylesheet" href="/static/pygments.css">
@@ -25,7 +31,7 @@
         <a href="{{ index_url }}#developers">{{ _('Developers') }}</a>
         <a href="{{ repo_url }}">GitHub</a>
         {% for alt in alternates if alt.code != lang.code %}
-        <a href="{{ alt.url }}" lang="{{ alt.code }}" hreflang="{{ alt.code }}">{{ alt.native_name }}</a>
+        <a href="{{ alt.url }}?lang={{ alt.code }}" lang="{{ alt.code }}" hreflang="{{ alt.code }}">{{ alt.native_name }}</a>
         {% endfor %}
       </nav>
     </div>
@@ -38,7 +44,7 @@
       <p>© 2020–{{ year }} Ben Homnick · <a href="{{ repo_url }}">{{ _('Source code and data on GitHub') }}</a> · MIT</p>
       <p>
         {% for alt in alternates if alt.code != lang.code %}
-        <a href="{{ alt.url }}" lang="{{ alt.code }}" hreflang="{{ alt.code }}">{{ alt.native_name }}</a>
+        <a href="{{ alt.url }}?lang={{ alt.code }}" lang="{{ alt.code }}" hreflang="{{ alt.code }}">{{ alt.native_name }}</a>
         {% endfor %}
       </p>
     </div>

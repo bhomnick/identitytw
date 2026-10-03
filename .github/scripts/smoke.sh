@@ -57,6 +57,15 @@ if [ -n "$SITE" ]; then
     echo "FAIL  provider page: could not read a slug from providers.json"
     failures=$((failures + 1))
   fi
+  case "$SITE" in https://*)
+    location="$(curl -sS -m 20 -o /dev/null -w '%{redirect_url}' -H 'Accept-Language: zh-TW,zh;q=0.9' "$SITE/" 2>/dev/null || true)"
+    if [ "$location" = "$SITE/zh-hant/" ]; then
+      echo "ok    chinese browsers land on /zh-hant/"
+    else
+      echo "FAIL  language negotiation: / with Accept-Language zh-TW went to '${location:-nothing}', expected $SITE/zh-hant/"
+      failures=$((failures + 1))
+    fi
+  ;; esac
   if [ "$SITE" = "https://identity.tw" ]; then
     location="$(curl -sS -m 20 -o /dev/null -w '%{redirect_url}' https://www.identity.tw/ 2>/dev/null || true)"
     if [ "$location" = "https://identity.tw/" ]; then
