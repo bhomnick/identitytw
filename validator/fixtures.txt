@@ -1,0 +1,104 @@
+# Test fixture shared by every validator implementation.
+# One case per line: "valid" or "invalid", whitespace, the ID number.
+# Lines starting with # are comments. Regenerate carefully; every implementation must agree.
+
+# Well-known example and the IDs that were in the original test fixture
+valid   A123456789
+valid   Z256783650
+valid   AB12345677
+valid   AC12345679
+valid   AB00207171
+valid   AC03095424
+valid   BD01300667
+valid   CC00151114
+valid   HD02717288
+valid   TD00251124
+
+# National ID: every issuing-office letter, gender digit 1 or 2
+valid   A119583237
+valid   B261420811
+valid   C248827831
+valid   D149626613
+valid   E199547140
+valid   F288778669
+valid   G270671474
+valid   H201748125
+valid   J233521640
+valid   K198275926
+valid   L116852207
+valid   M216011085
+valid   N268873650
+valid   P230509253
+valid   Q173992715
+valid   R236422748
+valid   S285539660
+valid   T107513963
+valid   U113524464
+valid   V206875459
+valid   X163049980
+valid   Y224332958
+valid   W242138379
+valid   Z199866236
+valid   I241930746
+valid   O191993425
+
+# Legacy ARC (pre-2021): second character A-D
+valid   OA65743420
+valid   EB98713417
+valid   RC77210191
+valid   OD05265929
+valid   QA18255673
+valid   YB23519897
+valid   AC14461407
+valid   WD78311999
+
+# New ARC (2021 onwards): second character 8 or 9
+valid   A800000014
+valid   Y846775806
+valid   Y965269549
+valid   B893341921
+valid   N958167354
+valid   D891909963
+valid   T937555644
+valid   R835029772
+
+# Wrong check digit
+invalid A123456780
+invalid Z256783651
+invalid AB12345678
+invalid AC12345670
+invalid AB00207172
+invalid AC03095425
+invalid BD01300668
+invalid CC00151115
+invalid HD02717289
+invalid TD00251125
+invalid A119583238
+invalid B261420812
+
+# Second character outside 1, 2, A-D, 8, 9
+invalid A023456789
+invalid A323456789
+invalid A423456789
+invalid A523456789
+invalid A723456789
+invalid AE23456789
+invalid AF23456789
+invalid AZ23456789
+
+# Wrong length
+invalid A12345678
+invalid A1234567890
+invalid A
+invalid AB1234567
+invalid AB123456789
+
+# Wrong characters
+invalid 1123456789
+invalid A12345678X
+invalid A-12345678
+invalid AB1234567A
+invalid Ａ123456789
+invalid A１23456789
+invalid ABCDEFGHIJ
+invalid 1234567890

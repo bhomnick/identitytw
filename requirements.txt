@@ -1,15 +1,11 @@
-# General
-boto3==1.15.*
-flickr-api==0.7.*
-Pillow==7.2.*
-psycopg2==2.8.*
-python-environ==0.4.*
-sorl-thumbnail==12.6.*
-waitress==1.4.*
-
-# Django
-Django==3.1.1
-django-model-utils==4.0.*
-django-object-actions==3.0.*
-django-storages==1.10.*
-django-taggit==1.3.*
+# Exact pins. To upgrade: in a fresh venv run
+#   pip install -U Django django-environ "psycopg[binary]" waitress whitenoise
+# then paste `pip freeze` here.
+asgiref==3.12.1
+Django==5.2.17
+django-environ==0.14.0
+psycopg[binary]==3.3.6
+psycopg-binary==3.3.6
+sqlparse==0.6.0
+waitress==3.0.2
+whitenoise==6.12.0

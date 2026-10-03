@@ -1,0 +1,14 @@
+{
+  "name": "identity-validator-worker",
+  "private": true,
+  "type": "module",
+  "description": "Cloudflare Worker serving the Taiwan ID validation API at https://v.identity.tw",
+  "scripts": {
+    "test": "node --test",
+    "check": "wrangler deploy --dry-run --outdir=dist",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "^4"
+  }
+}
