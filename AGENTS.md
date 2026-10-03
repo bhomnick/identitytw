@@ -75,9 +75,14 @@ CI runs the same commands.
 - Dates are `YYYY-MM-DD`. `updated` means "last checked", not "last edited".
 - Commit messages explain why. CI needs full git history (`fetch-depth: 0`)
   because service pages render `git log` for their file.
-- Deploys happen only from `master` and only when the Cloudflare secrets
-  exist; a PR never deploys. Pull requests upload the built site as a CI
-  artifact for review.
+- CI must cover everything: every validator language runs (a missing
+  toolchain fails the job), the site build is smoke-tested with
+  `.github/scripts/smoke.sh`, and new modules get tests in the same PR.
+- Production deploys happen only from `master`, ship the artifact the tests
+  ran against, and are verified against the live URLs afterwards. Pull
+  requests get a preview deployment and a comment with its URL. Both skip
+  with a warning when the Cloudflare secrets are absent.
+- When adding a page or endpoint, add a check for it to `smoke.sh`.
 
 ## Things not to do
 

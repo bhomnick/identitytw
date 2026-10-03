@@ -82,17 +82,33 @@ the Worker serves; `validator/javascript/package.json` is ready for
 The API (`worker/README.md`) is a demo for trying the algorithm. Production
 systems should use the code so ID numbers never leave them.
 
-## Deployment
+## CI and deployment
 
-Pushes to `master` run CI, then deploy the Worker with `wrangler deploy` and
-the site with `wrangler pages deploy` once these repository secrets exist:
+Every push and pull request runs the generator tests, builds the site and
+smoke-tests the build, runs all five validator implementations, and runs the
+Worker tests plus a wrangler dry run. A missing toolchain fails the job; nothing
+is skipped silently.
+
+Pull requests from this repository also get a preview deployment on
+Cloudflare Pages, smoke-tested and linked in a comment on the PR.
+
+Pushes to `master` deploy the Worker with `wrangler deploy` and the site with
+`wrangler pages deploy`, using the exact build artifact the tests ran against,
+then fetch the live pages and API to verify the deploy. A weekly scheduled run
+repeats the tests and the live checks. Dependabot opens weekly grouped
+update PRs for pip, npm, Go and the GitHub Actions.
+
+All of this needs these repository secrets:
 
 | Secret                  | Value                                                            |
 |-------------------------|------------------------------------------------------------------|
 | `CLOUDFLARE_API_TOKEN`  | Token with "Edit Cloudflare Workers" and "Cloudflare Pages: Edit" |
 | `CLOUDFLARE_ACCOUNT_ID` | Account ID from the Workers & Pages overview                      |
 
-Until the secrets are set, the deploy job prints a notice and skips.
+Until the secrets are set, the deploy and preview jobs print a warning and
+skip. After the custom domain is live, set the repository variable
+`SITE_URL` to `https://identity.tw` so the post-deploy check and the weekly
+health check test the real domain instead of `identitytw.pages.dev`.
 
 ### Moving off Heroku
 
