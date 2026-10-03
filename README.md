@@ -122,8 +122,9 @@ cut over:
 2. Create the Pages project: `npx wrangler pages project create identitytw --production-branch master`
    (from `worker/`, after `npm install`), add the secrets above, and push to
    `master`. Check the result at `identitytw.pages.dev`.
-3. In the Pages project, add `identity.tw` as a custom domain. Cloudflare
-   updates the DNS record that currently points at Heroku.
+3. In the Pages project, add `identity.tw` and `www.identity.tw` as custom
+   domains. Cloudflare updates the two DNS records that currently point at
+   Heroku's DNS targets.
 4. Delete the Heroku app and its database.
 
 Licensed under the MIT license. See `LICENSE`.
