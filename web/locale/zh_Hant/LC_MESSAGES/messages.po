@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: identity.tw VERSION\n"
 "Report-Msgid-Bugs-To: https://github.com/bhomnick/identitytw/issues\n"
-"POT-Creation-Date: 2026-10-02 18:29-0700\n"
+"POT-Creation-Date: 2026-10-02 21:42-0700\n"
 "PO-Revision-Date: 2026-10-02 17:35-0700\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh_Hant\n"
@@ -129,114 +129,117 @@ msgid ""
 "plus free validation code that accepts every legal ID number format."
 msgstr "公開評比台灣線上服務對居留證持有人的待遇，並提供可接受所有合法證號格式的免費驗證程式碼。"
 
-# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
-#, python-format
-msgid ""
-"Foreign residents hold an Alien Resident Certificate (ARC) number instead"
-" of a national ID. Many websites reject it. This site scores %(count)s "
-"services on how they treat ARC holders, and gives developers the code to "
-"fix theirs."
-msgstr ""
-"外籍居民持有的是居留證（ARC）上的外來人口統一證號，而非身分證字號，但許多網站不接受。本站針對 %(count)s "
-"個服務評比其對居留證持有人的待遇，並提供開發者修正驗證程式的程式碼。"
+msgid "Validation Libraries"
+msgstr "驗證函式庫"
 
 # NEEDS NATIVE REVIEW: translated by Claude, 2026-10
-msgid "See the report"
-msgstr "查看報告"
+msgid "For developers"
+msgstr "給開發者"
 
 # NEEDS NATIVE REVIEW: translated by Claude, 2026-10
-msgid "Fix your validator"
-msgstr "修正你的驗證程式"
-
-# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
-msgid "services reviewed"
-msgstr "個服務受評"
-
-# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
-msgid "fully inclusive (grade A+)"
-msgstr "完全包容（A+ 評等）"
-
-# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
-msgid "reject the ARC number format issued since 2021"
-msgstr "不接受 2021 年起核發的新式統一證號"
-
-# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
-msgid "deny service to non-citizens outright"
-msgstr "完全拒絕提供服務給非國民"
+msgid "Validation code"
+msgstr "驗證程式碼"
 
 msgid "Transparency Report"
 msgstr "透明度報告"
 
 # NEEDS NATIVE REVIEW: translated by Claude, 2026-10
-msgid ""
-"Each service is scored on whether it accepts legacy and new ARC numbers, "
-"offers the same service to non-citizens, and lets them register online. "
-"Click a service for the full breakdown and its history."
-msgstr "每個服務依據是否接受舊式與新式外來人口統一證號、是否對非國民提供相同服務、以及非國民是否可線上註冊來評分。點選服務可查看完整評分與變更紀錄。"
-
-# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
-msgid "Found a service that rejects your ARC number, or one that has fixed it?"
-msgstr "發現有服務不接受您的統一證號，或是已經修正了嗎？"
-
-# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
-msgid "Report it on GitHub"
-msgstr "到 GitHub 回報"
-
-# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
-msgid "Search"
-msgstr "搜尋"
-
-# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
-msgid "Service name"
-msgstr "服務名稱"
+#, python-format
+msgid "%(name)s: grade %(grade)s for how it treats ARC holders."
+msgstr "%(name)s：對居留證持有人待遇的評等為 %(grade)s。"
 
 msgid "Category"
 msgstr "類別"
 
-# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
-msgid "All categories"
-msgstr "所有類別"
-
-# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
-msgid "Grade"
-msgstr "評等"
-
-# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
-msgid "Issues"
-msgstr "問題"
+msgid "Score"
+msgstr "等級"
 
 msgid "Updated"
 msgstr "更新時間"
 
 # NEEDS NATIVE REVIEW: translated by Claude, 2026-10
-msgid "None"
-msgstr "無"
+msgid "Criterion"
+msgstr "評分項目"
 
 # NEEDS NATIVE REVIEW: translated by Claude, 2026-10
-msgid "No services match."
-msgstr "沒有符合的服務。"
+msgid "Result"
+msgstr "結果"
 
 # NEEDS NATIVE REVIEW: translated by Claude, 2026-10
-msgid "Download the data as JSON"
-msgstr "下載 JSON 資料"
+msgid "Points"
+msgstr "得分"
 
 # NEEDS NATIVE REVIEW: translated by Claude, 2026-10
-msgid "Edit the data on GitHub"
-msgstr "在 GitHub 上編輯資料"
+msgid "Notes"
+msgstr "備註"
 
 # NEEDS NATIVE REVIEW: translated by Claude, 2026-10
-msgid "How the grades work"
-msgstr "評等方式"
+msgid "Sources"
+msgstr "來源"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+msgid "History"
+msgstr "變更紀錄"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+msgid "Edit this entry on GitHub"
+msgstr "在 GitHub 上編輯此項目"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+msgid "Report a change"
+msgstr "回報變更"
+
+msgid "Hosted Validation Service"
+msgstr "線上驗證服務"
+
+msgid ""
+"This ID number validation API covers all forms of legal resident ID "
+"numbers and is provided free of charge."
+msgstr "該ID號碼驗證API涵蓋所有台灣居民統一編號，並且是免費提供。"
 
 # NEEDS NATIVE REVIEW: translated by Claude, 2026-10
 msgid ""
-"Every service starts at 100 points. Each criterion below can deduct "
-"points, and the grade follows from the total."
-msgstr "每個服務從 100 分起算，以下各項目可能扣分，評等依總分而定。"
+"It is a demo for trying the algorithm. In production, use the code on "
+"this page so that ID numbers never leave your own systems. Nothing sent "
+"to this endpoint is logged."
+msgstr "此端點僅供試用演算法。正式環境請使用本頁的程式碼，讓證號不會離開您自己的系統。送至此端點的資料不會被記錄。"
+
+msgid "Example request:"
+msgstr "請求示例："
+
+msgid "Example response:"
+msgstr "響應示例:"
+
+msgid "Try it out:"
+msgstr "試試看："
 
 # NEEDS NATIVE REVIEW: translated by Claude, 2026-10
-msgid "For developers"
-msgstr "給開發者"
+msgid "ID number"
+msgstr "證號"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+msgid "Submit"
+msgstr "送出"
+
+msgid "Request:"
+msgstr "請求:"
+
+msgid "Response:"
+msgstr "響應:"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+msgid ""
+"Each implementation accepts all three formats and is tested against the "
+"same set of IDs on every change. Copy the one for your language."
+msgstr "每個實作都接受全部三種格式，且每次變更都以同一組證號測試。請複製您使用的語言版本。"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+msgid "Programming language"
+msgstr "程式語言"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+msgid "Source and tests on GitHub"
+msgstr "GitHub 上的原始碼與測試"
 
 # NEEDS NATIVE REVIEW: translated by Claude, 2026-10
 msgid ""
@@ -290,91 +293,113 @@ msgid "Foreign residents, since January 2021"
 msgstr "外籍居民，2021 年 1 月起核發"
 
 # NEEDS NATIVE REVIEW: translated by Claude, 2026-10
-msgid "Validation code"
-msgstr "驗證程式碼"
-
-# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
-msgid ""
-"Each implementation accepts all three formats and is tested against the "
-"same set of IDs on every change. Copy the one for your language."
-msgstr "每個實作都接受全部三種格式，且每次變更都以同一組證號測試。請複製您使用的語言版本。"
-
-# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
-msgid "Programming language"
-msgstr "程式語言"
-
-# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
-msgid "Source and tests on GitHub"
-msgstr "GitHub 上的原始碼與測試"
-
-# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
-msgid "Hosted validation API"
-msgstr "線上驗證 API"
-
-# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
-msgid ""
-"A free endpoint for trying the algorithm. In production, use the code "
-"above so that ID numbers never leave your own systems. Nothing sent to "
-"this endpoint is logged."
-msgstr "免費的演算法試用端點。正式環境請使用上方程式碼，讓證號不會離開您自己的系統。送至此端點的資料不會被記錄。"
-
-# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
-msgid "Try it out"
-msgstr "試試看"
-
-# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
-msgid "ID number"
-msgstr "證號"
-
-# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
-msgid "Validate"
-msgstr "驗證"
-
-# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
-msgid "Request"
-msgstr "請求"
-
-# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
-msgid "Response"
-msgstr "回應"
-
-# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
 #, python-format
-msgid "%(name)s: grade %(grade)s for how it treats ARC holders."
-msgstr "%(name)s：對居留證持有人待遇的評等為 %(grade)s。"
-
-msgid "Score"
-msgstr "等級"
-
-# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
-msgid "Criterion"
-msgstr "評分項目"
-
-# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
-msgid "Result"
-msgstr "結果"
+msgid ""
+"Foreign residents hold an Alien Resident Certificate (ARC) number instead"
+" of a national ID. Many websites reject it. This site scores %(count)s "
+"services on how they treat ARC holders, and gives developers the code to "
+"fix theirs."
+msgstr ""
+"外籍居民持有的是居留證（ARC）上的外來人口統一證號，而非身分證字號，但許多網站不接受。本站針對 %(count)s "
+"個服務評比其對居留證持有人的待遇，並提供開發者修正驗證程式的程式碼。"
 
 # NEEDS NATIVE REVIEW: translated by Claude, 2026-10
-msgid "Points"
-msgstr "得分"
+msgid "See the report"
+msgstr "查看報告"
 
 # NEEDS NATIVE REVIEW: translated by Claude, 2026-10
-msgid "Notes"
-msgstr "備註"
+msgid "Fix your validator"
+msgstr "修正你的驗證程式"
+
+msgid "Validation API"
+msgstr "驗證API"
+
+msgid "Free hosted validation service"
+msgstr "免費線上的驗證服務"
+
+msgid "Libraries"
+msgstr "函式庫"
+
+msgid "Validation libraries for major software languages"
+msgstr "主要軟體語言的驗證庫"
+
+msgid "See how online platforms compare"
+msgstr "查看線上服務提供商的差別"
 
 # NEEDS NATIVE REVIEW: translated by Claude, 2026-10
-msgid "Sources"
-msgstr "來源"
+msgid "How the grades work"
+msgstr "評等方式"
 
 # NEEDS NATIVE REVIEW: translated by Claude, 2026-10
-msgid "History"
-msgstr "變更紀錄"
+msgid ""
+"Every service starts at 100 points. Each criterion below can deduct "
+"points, and the grade follows from the total."
+msgstr "每個服務從 100 分起算，以下各項目可能扣分，評等依總分而定。"
 
 # NEEDS NATIVE REVIEW: translated by Claude, 2026-10
-msgid "Edit this entry on GitHub"
-msgstr "在 GitHub 上編輯此項目"
+msgid ""
+"Each service is scored on whether it accepts legacy and new ARC numbers, "
+"offers the same service to non-citizens, and lets them register online. "
+"Click a service for the full breakdown and its history."
+msgstr "每個服務依據是否接受舊式與新式外來人口統一證號、是否對非國民提供相同服務、以及非國民是否可線上註冊來評分。點選服務可查看完整評分與變更紀錄。"
 
 # NEEDS NATIVE REVIEW: translated by Claude, 2026-10
-msgid "Report a change"
-msgstr "回報變更"
+msgid "Found a service that rejects your ARC number, or one that has fixed it?"
+msgstr "發現有服務不接受您的統一證號，或是已經修正了嗎？"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+msgid "Report it on GitHub"
+msgstr "到 GitHub 回報"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+msgid "Search"
+msgstr "搜尋"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+msgid "Service name"
+msgstr "服務名稱"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+msgid "All categories"
+msgstr "所有類別"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+msgid "Grade"
+msgstr "評等"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+msgid "Issues"
+msgstr "問題"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+msgid "None"
+msgstr "無"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+msgid "No services match."
+msgstr "沒有符合的服務。"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+msgid "Download the data as JSON"
+msgstr "下載 JSON 資料"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+msgid "Edit the data on GitHub"
+msgstr "在 GitHub 上編輯資料"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+msgid "services reviewed"
+msgstr "個服務受評"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+msgid "fully inclusive (grade A+)"
+msgstr "完全包容（A+ 評等）"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+msgid "reject the ARC number format issued since 2021"
+msgstr "不接受 2021 年起核發的新式統一證號"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+msgid "deny service to non-citizens outright"
+msgstr "完全拒絕提供服務給非國民"
 

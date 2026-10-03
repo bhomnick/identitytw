@@ -45,6 +45,13 @@ LOCALE_DIR = WEB_DIR / 'locale'
 VALIDATOR_DIR = REPO_DIR / 'validator'
 DEFAULT_OUT = WEB_DIR / 'dist'
 
+# Homepage layouts: which template renders the index.
+LAYOUTS = {
+    'report-first': 'index.html',
+    'classic': 'index-classic.html',
+}
+DEFAULT_LAYOUT = 'report-first'
+
 SITE_URL = 'https://identity.tw'
 API_URL = 'https://v.identity.tw'
 REPO_URL = 'https://github.com/bhomnick/identitytw'
@@ -299,9 +306,7 @@ def highlighted_snippets():
 
 
 def pygments_css():
-    light = HtmlFormatter(style='default', nobackground=True).get_style_defs('.highlight')
-    dark = HtmlFormatter(style='github-dark', nobackground=True).get_style_defs('.highlight')
-    return f'{light}\n@media (prefers-color-scheme: dark) {{\n{dark}\n}}\n'
+    return HtmlFormatter(style='default', nobackground=True).get_style_defs('.highlight') + '\n'
 
 
 def report_stats(providers):
@@ -389,8 +394,9 @@ def provider_json(provider):
     }
 
 
-def build(out_dir=DEFAULT_OUT, data_dir=DATA_DIR):
+def build(out_dir=DEFAULT_OUT, data_dir=DATA_DIR, layout=DEFAULT_LAYOUT):
     out_dir = Path(out_dir)
+    index_template = LAYOUTS[layout]
     categories = load_categories(data_dir)
     providers = [p for p in load_providers(categories, data_dir) if p.active]
     providers.sort(key=lambda p: (categories[p.category]['en'].lower(), p.name.lower()))
@@ -438,7 +444,7 @@ def build(out_dir=DEFAULT_OUT, data_dir=DATA_DIR):
                 'year': dt.date.today().year,
             }
 
-        write(language, '', env.get_template('index.html').render(
+        write(language, '', env.get_template(index_template).render(
             **context(''), providers=providers, categories=categories, snippets=snippets,
             stats=stats, criteria=criteria, grades=GRADES, example_response=example_response,
         ))
@@ -566,14 +572,14 @@ def snapshot(roots):
     return stamps
 
 
-def serve(out_dir, port=8000):
+def serve(out_dir, port=8000, layout=DEFAULT_LAYOUT):
     """Build, serve out_dir, rebuild when web/ or validator/ change, reload open pages."""
     sys.stdout.reconfigure(line_buffering=True)
     state = DevState()
 
     def rebuild():
         try:
-            build(out_dir)
+            build(out_dir, layout=layout)
             state.error = None
             print(f'{time.strftime("%H:%M:%S")} built')
         except DataError as exc:
@@ -615,16 +621,17 @@ def main(argv=None):
     parser.add_argument('--out', type=Path, default=DEFAULT_OUT, help='output directory (default: web/dist)')
     parser.add_argument('--serve', action='store_true', help='serve the site locally, rebuilding and reloading on changes')
     parser.add_argument('--port', type=int, default=8000, help='port for --serve (default: 8000)')
+    parser.add_argument('--layout', choices=sorted(LAYOUTS), default=DEFAULT_LAYOUT, help='homepage layout (default: %(default)s)')
     parser.add_argument('--update-catalog', action='store_true', help='pull new translatable strings into the .po files')
     args = parser.parse_args(argv)
     if args.update_catalog:
         update_catalog()
         return 0
     if args.serve:
-        serve(args.out, args.port)
+        serve(args.out, args.port, args.layout)
         return 0
     try:
-        out = build(args.out)
+        out = build(args.out, layout=args.layout)
     except DataError as exc:
         print(f'error: {exc}', file=sys.stderr)
         return 1

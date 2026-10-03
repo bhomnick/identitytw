@@ -1,0 +1,21 @@
+        <h3>{{ _('How the grades work') }}</h3>
+        <p>{{ _('Every service starts at 100 points. Each criterion below can deduct points, and the grade follows from the total.') }}</p>
+        <div class="criteria">
+          {% for criterion in criteria %}
+          <div class="card">
+            <h3>{{ _(criterion.label) }}</h3>
+            <dl>
+              {% for option in criterion.options %}
+              <dt><span>{{ _(option.short) }}</span><span class="points{% if option.points == 0 %} zero{% endif %}">{{ option.points }}</span></dt>
+              <dd>{{ _(option.long) }}</dd>
+              {% endfor %}
+            </dl>
+          </div>
+          {% endfor %}
+        </div>
+        <p class="grade-scale">
+          {% for threshold, grade in grades %}
+          <span class="grade grade-{{ grade[0] | lower }}">{{ grade }}</span> <span class="muted">≥ {{ threshold }}</span>
+          {% endfor %}
+          <span class="grade grade-f">F</span> <span class="muted">&lt; 50</span>
+        </p>

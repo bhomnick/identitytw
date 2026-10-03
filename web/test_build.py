@@ -171,6 +171,15 @@ class BuildTests(unittest.TestCase):
                 text = html.unescape(re.sub(r'<[^>]+>', '', panel)).strip()
                 self.assertEqual(text, snippet, 'highlighted code must read back as the source file')
 
+    def test_classic_layout_builds_with_the_same_content(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            out = build.build(Path(tmp) / 'dist', layout='classic')
+            html = (out / 'index.html').read_text(encoding='utf-8')
+        self.assertIn('class="icon-boxes"', html)
+        self.assertIn('class="report-table"', html)
+        for provider in self.providers:
+            self.assertIn(provider.name, html)
+
     def test_hero_statistics_match_the_data(self):
         stats = build.report_stats(self.providers)
         self.assertEqual(stats['total'], len(self.providers))
@@ -180,7 +189,7 @@ class BuildTests(unittest.TestCase):
     def test_static_headers_and_sitemap(self):
         for name in ('site.css', 'site.js', 'pygments.css', 'favicon.png'):
             self.assertTrue((self.out / 'static' / name).exists(), name)
-        self.assertIn('prefers-color-scheme: dark', (self.out / 'static' / 'pygments.css').read_text())
+        self.assertIn('.highlight .k ', (self.out / 'static' / 'pygments.css').read_text())
         self.assertIn('X-Frame-Options', (self.out / '_headers').read_text())
         sitemap = (self.out / 'sitemap.xml').read_text()
         self.assertIn('<loc>https://identity.tw/</loc>', sitemap)

@@ -1,0 +1,57 @@
+        <h2>{{ _('Transparency Report') }}</h2>
+        <p class="lead">{{ _('Each service is scored on whether it accepts legacy and new ARC numbers, offers the same service to non-citizens, and lets them register online. Click a service for the full breakdown and its history.') }}</p>
+        <p>{{ _('Found a service that rejects your ARC number, or one that has fixed it?') }} <a href="{{ repo_url }}/issues/new">{{ _('Report it on GitHub') }}</a>.</p>
+        {% if report_stats %}
+        {% include 'partials/stats.html' %}
+        {% endif %}
+        <div class="filters">
+          <label class="muted" for="report-search">{{ _('Search') }}</label>
+          <input id="report-search" type="search" placeholder="{{ _('Service name') }}" autocomplete="off">
+          <label class="muted" for="report-category">{{ _('Category') }}</label>
+          <select id="report-category">
+            <option value="">{{ _('All categories') }}</option>
+            {% for slug, names in categories.items() %}
+            <option value="{{ slug }}">{{ names[lang.code] }}</option>
+            {% endfor %}
+          </select>
+          <span class="count" id="report-count" aria-live="polite"></span>
+        </div>
+        <div class="table-wrap">
+          <table class="report-table">
+            <thead>
+              <tr>
+                <th scope="col">{{ _('Service') }}</th>
+                <th scope="col">{{ _('Category') }}</th>
+                <th scope="col">{{ _('Grade') }}</th>
+                <th scope="col">{{ _('Issues') }}</th>
+                <th scope="col">{{ _('Updated') }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for provider in providers %}
+              <tr data-name="{{ provider.name | lower }}" data-category="{{ provider.category }}">
+                <td><a href="{{ index_url }}providers/{{ provider.slug }}/">{{ provider.name }}</a></td>
+                <td>{{ category_name(provider.category) }}</td>
+                <td><span class="grade grade-{{ provider.grade_class }}">{{ provider.grade }}</span></td>
+                <td>
+                  {% if provider.reasons %}
+                  <ul>
+                    {% for reason in provider.reasons %}
+                    <li>{{ _(reason.short) }}</li>
+                    {% endfor %}
+                  </ul>
+                  {% else %}
+                  <span class="muted">{{ _('None') }}</span>
+                  {% endif %}
+                </td>
+                <td class="nowrap" data-label="{{ _('Updated') }}">{{ provider.updated.isoformat() }}</td>
+              </tr>
+              {% endfor %}
+              <tr class="empty" hidden><td colspan="5">{{ _('No services match.') }}</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="muted">
+          <a href="/providers.json">{{ _('Download the data as JSON') }}</a> ·
+          <a href="{{ repo_url }}/tree/master/web/data/providers">{{ _('Edit the data on GitHub') }}</a>
+        </p>
