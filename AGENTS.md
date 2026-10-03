@@ -24,8 +24,9 @@ change together, and what not to touch.
 
 ## Commands
 
-    python web/build.py                                   # build -> web/dist
-    python -m http.server --directory web/dist 8000       # view it
+    python web/build.py --serve                           # build, serve on :8000, rebuild + reload on change
+    python web/build.py                                   # one-off build -> web/dist
+    python web/build.py --update-catalog                  # after changing translatable strings
     python -m unittest discover -s web -p 'test_*.py'     # site tests
     ./validator/test.sh                                   # all five validators (php, java, go needed)
     VALIDATOR_LANGS="python javascript" ./validator/test.sh
@@ -43,8 +44,8 @@ CI runs the same commands.
   `\n`) in every harness. The worker imports the JavaScript file, and the
   site embeds all five verbatim, so there is one copy of each.
 - **Every translatable string is translated.** After adding or changing
-  text in `web/templates/` or `web/build.py`, run the `pybabel extract` and
-  `pybabel update` commands from the README and fill in `messages.po`. The
+  text in `web/templates/` or `web/build.py`, run
+  `python web/build.py --update-catalog` and fill in `messages.po`. The
   test suite fails on missing, obsolete, fuzzy or empty entries. Mark
   translations you drafted without a native speaker with the translator
   comment `NEEDS NATIVE REVIEW`. Python-side strings are wrapped in `N_()`

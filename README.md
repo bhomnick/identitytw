@@ -46,8 +46,12 @@ Python 3.13 (see `.python-version`).
 
     python3.13 -m venv .venv && source .venv/bin/activate   # or: uv venv --python 3.13
     pip install -r requirements.txt
-    python web/build.py                                      # -> web/dist
-    python -m http.server --directory web/dist 8000
+    python web/build.py --serve
+
+That builds the site, serves it at http://127.0.0.1:8000/, rebuilds whenever
+anything under `web/` or `validator/` changes, and reloads open pages. A
+failing build shows its error at the bottom of the page and keeps serving
+the last good build. `python web/build.py` alone writes `web/dist` once.
 
 Tests:
 
@@ -60,9 +64,8 @@ Tests:
 The site is in English and Traditional Chinese. After adding or changing a
 string in `web/templates/` or `web/build.py`:
 
-    pybabel extract -F web/babel.cfg -k N_ -o /tmp/messages.pot web
-    pybabel update -i /tmp/messages.pot -d web/locale -l zh_Hant
-    # edit web/locale/zh_Hant/LC_MESSAGES/messages.po
+    python web/build.py --update-catalog
+    # fill in the empty msgstr entries in web/locale/zh_Hant/LC_MESSAGES/messages.po
 
 The build compiles `.po` files itself. CI fails when the catalog is out of
 date or a string is untranslated. Entries marked `NEEDS NATIVE REVIEW` in the

@@ -4,11 +4,14 @@
 """
 import datetime as dt
 import html
+import http.server
 import json
 import re
 import shutil
 import tempfile
+import threading
 import unittest
+import urllib.request
 from pathlib import Path
 
 from babel.messages.extract import DEFAULT_KEYWORDS, extract_from_dir
@@ -117,8 +120,8 @@ class TranslationTests(unittest.TestCase):
                 with build.po_path(language).open('rb') as f:
                     catalog = read_po(f, locale=language.locale)
                 catalog_ids = {m.id for m in catalog if m.id}
-                self.assertEqual(sources - catalog_ids, set(), 'strings missing from the catalog; run pybabel extract/update (see README)')
-                self.assertEqual(catalog_ids - sources, set(), 'obsolete strings in the catalog; run pybabel update')
+                self.assertEqual(sources - catalog_ids, set(), 'strings missing from the catalog; run: python web/build.py --update-catalog')
+                self.assertEqual(catalog_ids - sources, set(), 'obsolete strings in the catalog; run: python web/build.py --update-catalog')
                 untranslated = sorted(m.id for m in catalog if m.id and (not m.string or m.fuzzy))
                 self.assertEqual(untranslated, [], 'untranslated or fuzzy strings')
 
@@ -183,6 +186,41 @@ class BuildTests(unittest.TestCase):
         self.assertIn('<loc>https://identity.tw/</loc>', sitemap)
         self.assertIn('<loc>https://identity.tw/zh-hant/</loc>', sitemap)
         self.assertEqual(sitemap.count('<loc>'), 2 * (1 + len(self.providers)))
+
+
+class DevServerTests(unittest.TestCase):
+    def test_injects_reload_script_and_reports_version(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp)
+            (out / 'providers' / 'x').mkdir(parents=True)
+            (out / 'index.html').write_text('<html><body>home</body></html>', encoding='utf-8')
+            (out / 'providers' / 'x' / 'index.html').write_text('<html><body>x</body></html>', encoding='utf-8')
+            (out / 'data.json').write_text('{}', encoding='utf-8')
+            state = build.DevState()
+            state.version = 3
+            state.error = 'boom'
+            server = http.server.ThreadingHTTPServer(('127.0.0.1', 0), build.make_handler(out, state))
+            threading.Thread(target=server.serve_forever, daemon=True).start()
+            base = f'http://127.0.0.1:{server.server_address[1]}'
+            try:
+                home = urllib.request.urlopen(base + '/').read().decode('utf-8')
+                self.assertIn("fetch('/__version'", home)
+                self.assertTrue(home.endswith('</body></html>'), 'script goes before </body>')
+                self.assertIn("fetch('/__version'", urllib.request.urlopen(base + '/providers/x/').read().decode('utf-8'))
+                self.assertEqual(json.loads(urllib.request.urlopen(base + '/__version').read()), {'version': 3, 'error': 'boom'})
+                self.assertEqual(urllib.request.urlopen(base + '/data.json').read(), b'{}')
+            finally:
+                server.shutdown()
+
+    def test_snapshot_ignores_build_output(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / 'dist').mkdir()
+            (root / 'dist' / 'index.html').write_text('x')
+            (root / 'locale').mkdir()
+            (root / 'locale' / 'messages.mo').write_bytes(b'x')
+            (root / 'data.yaml').write_text('x')
+            self.assertEqual({p.name for p in build.snapshot([root])}, {'data.yaml'})
 
 
 if __name__ == '__main__':
