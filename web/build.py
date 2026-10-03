@@ -424,7 +424,7 @@ def build(out_dir=DEFAULT_OUT, data_dir=DATA_DIR, layout=DEFAULT_LAYOUT):
     index_template = LAYOUTS[layout]
     categories = load_categories(data_dir)
     providers = [p for p in load_providers(categories, data_dir) if p.active]
-    providers.sort(key=lambda p: (categories[p.category]['en'].lower(), p.name.lower()))
+    providers.sort(key=lambda p: p.name.casefold())
     snippets = highlighted_snippets()
     stats = report_stats(providers)
     criteria = criteria_overview()

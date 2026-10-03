@@ -16,10 +16,10 @@
           </select>
           <label class="muted" for="report-sort">{{ _('Sort') }}</label>
           <select id="report-sort">
-            <option value="category">{{ _('Category') }}</option>
-            <option value="worst">{{ _('Worst first') }}</option>
-            <option value="best">{{ _('Best first') }}</option>
             <option value="name">{{ _('Name') }}</option>
+            <option value="category">{{ _('Category') }}</option>
+            <option value="best">{{ _('Best first') }}</option>
+            <option value="worst">{{ _('Worst first') }}</option>
             <option value="updated">{{ _('Recently checked') }}</option>
           </select>
           <span class="count" id="report-count" aria-live="polite"></span>
@@ -33,18 +33,18 @@
           <table class="report-table">
             <thead>
               <tr>
-                <th scope="col">{{ _('Service') }}</th>
-                <th scope="col">{{ _('Category') }}</th>
-                <th scope="col" class="grade-head">{{ _('Grade') }}</th>
+                <th scope="col" data-sort="name" aria-sort="ascending"><button type="button" class="sort-button">{{ _('Service') }}</button></th>
+                <th scope="col" data-sort="category"><button type="button" class="sort-button">{{ _('Category') }}</button></th>
+                <th scope="col" class="grade-head" data-sort="score"><button type="button" class="sort-button">{{ _('Grade') }}</button></th>
                 {% for criterion in criteria %}
-                <th scope="col" class="mark-head">{{ _(criterion.heading) }}</th>
+                <th scope="col" class="mark-head" data-sort="{{ criterion.key }}"><button type="button" class="sort-button">{{ _(criterion.heading) }}</button></th>
                 {% endfor %}
-                <th scope="col">{{ _('Updated') }}</th>
+                <th scope="col" data-sort="updated"><button type="button" class="sort-button">{{ _('Updated') }}</button></th>
               </tr>
             </thead>
             <tbody>
               {% for provider in providers %}
-              <tr data-name="{{ provider.name | lower }}" data-category="{{ provider.category }}" data-score="{{ provider.score }}" data-updated="{{ provider.updated.isoformat() }}">
+              <tr data-name="{{ provider.name | lower }}" data-category="{{ provider.category }}" data-category-name="{{ category_name(provider.category) }}" data-score="{{ provider.score }}" data-updated="{{ provider.updated.isoformat() }}"{% for c in provider.criteria %} data-{{ c.key.replace('_', '-') }}="{{ c.points }}"{% endfor %}>
                 <td class="name"><a href="{{ index_url }}providers/{{ provider.slug }}/">{{ provider.name }}</a></td>
                 <td class="category">{{ category_name(provider.category) }}</td>
                 <td class="grade-cell"><span class="grade grade-{{ provider.grade_class }}">{{ provider.grade }}</span></td>

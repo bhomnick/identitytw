@@ -2,28 +2,76 @@
 (function () {
   'use strict';
 
-  // Report filters: category select and text search.
+  // Report: text search, category filter, and sorting by the select or by
+  // clicking a column header. Rows are sorted in place; nothing is hidden
+  // from find-in-page except by the filters.
   var search = document.getElementById('report-search');
   var category = document.getElementById('report-category');
-  var sort = document.getElementById('report-sort');
-  var rows = document.querySelectorAll('.report-table tbody tr[data-name]');
-  var emptyRow = document.querySelector('.report-table .empty');
+  var sortSelect = document.getElementById('report-sort');
+  var table = document.querySelector('.report-table');
+  var rows = table ? table.querySelectorAll('tbody tr[data-name]') : [];
+  var emptyRow = table ? table.querySelector('.empty') : null;
   var count = document.getElementById('report-count');
   if (search && category && rows.length) {
     var tbody = rows[0].parentNode;
-    var original = Array.prototype.slice.call(rows);
-    var orders = {
-      category: function (a, b) { return original.indexOf(a) - original.indexOf(b); },
-      worst: function (a, b) { return (+a.dataset.score) - (+b.dataset.score) || a.dataset.name.localeCompare(b.dataset.name); },
-      best: function (a, b) { return (+b.dataset.score) - (+a.dataset.score) || a.dataset.name.localeCompare(b.dataset.name); },
-      name: function (a, b) { return a.dataset.name.localeCompare(b.dataset.name); },
-      updated: function (a, b) { return b.dataset.updated.localeCompare(a.dataset.updated) || a.dataset.name.localeCompare(b.dataset.name); }
+    var all = Array.prototype.slice.call(rows);
+    var headers = table.querySelectorAll('th[data-sort]');
+    // First click on a column sorts it this way; a second click flips it.
+    var defaultDir = { name: 'asc', category: 'asc', score: 'desc', updated: 'desc',
+                       legacy_arc: 'asc', new_arc: 'asc', service: 'asc', registration: 'asc' };
+    // The select's options, as column + direction.
+    var presets = { name: ['name', 'asc'], category: ['category', 'asc'], best: ['score', 'desc'],
+                    worst: ['score', 'asc'], updated: ['updated', 'desc'] };
+    var current = { key: 'name', dir: 'asc' };
+
+    var valueOf = function (row, key) {
+      if (key === 'name') { return row.dataset.name; }
+      if (key === 'category') { return row.dataset.categoryName + '\u0000' + row.dataset.name; }
+      if (key === 'updated') { return row.dataset.updated; }
+      return parseFloat(row.dataset[key.replace(/_([a-z])/g, function (m, c) { return c.toUpperCase(); })]);
     };
-    var reorder = function () {
-      var sorted = original.slice().sort(orders[sort && sort.value] || orders.category);
+    var compare = function (a, b, key) {
+      var va = valueOf(a, key), vb = valueOf(b, key);
+      if (typeof va === 'number') { return va - vb; }
+      return va < vb ? -1 : (va > vb ? 1 : 0);
+    };
+    var applySort = function () {
+      var sorted = all.slice().sort(function (a, b) {
+        var c = compare(a, b, current.key) || compare(a, b, 'name');
+        return current.dir === 'asc' ? c : -c;
+      });
       sorted.forEach(function (row) { tbody.insertBefore(row, emptyRow); });
+      Array.prototype.forEach.call(headers, function (th) {
+        if (th.dataset.sort === current.key) {
+          th.setAttribute('aria-sort', current.dir === 'asc' ? 'ascending' : 'descending');
+        } else {
+          th.removeAttribute('aria-sort');
+        }
+      });
+      if (sortSelect) {
+        var match = Object.keys(presets).filter(function (name) {
+          return presets[name][0] === current.key && presets[name][1] === current.dir;
+        })[0];
+        if (match) { sortSelect.value = match; }
+      }
     };
-    if (sort) { sort.addEventListener('change', reorder); }
+    Array.prototype.forEach.call(headers, function (th) {
+      th.querySelector('button').addEventListener('click', function () {
+        var key = th.dataset.sort;
+        if (current.key === key) {
+          current.dir = current.dir === 'asc' ? 'desc' : 'asc';
+        } else {
+          current = { key: key, dir: defaultDir[key] || 'asc' };
+        }
+        applySort();
+      });
+    });
+    if (sortSelect) {
+      sortSelect.addEventListener('change', function () {
+        var preset = presets[sortSelect.value];
+        if (preset) { current = { key: preset[0], dir: preset[1] }; applySort(); }
+      });
+    }
     var apply = function () {
       var query = search.value.trim().toLowerCase();
       var wanted = category.value;
