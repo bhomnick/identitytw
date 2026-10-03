@@ -17,7 +17,8 @@ change together, and what not to touch.
 | `web/test_build.py`          | Generator, data, translation and build-output tests.             |
 | `web/scripts/import_providers.py` | Converts an `export_providers` JSON dump into provider files. |
 | `validator/<language>/`      | Reference validators. `fixtures.txt` is the shared test set.     |
-| `worker/`                    | Cloudflare Worker for `v.identity.tw`. Imports the JS validator. |
+| `worker/`                    | Cloudflare Worker for `v.identity.tw` (`green-shape-e78d`). Imports the JS validator. |
+| `web/wrangler.toml`, `web/redirect.js` | The site itself as a static-assets Worker (`identitytw`). Custom domains are opt-in in the config. |
 | `.github/workflows/ci.yml`   | Tests everything; deploys Pages and the Worker from `master`.    |
 
 `web/dist/` is build output and is ignored by git. Never edit it.

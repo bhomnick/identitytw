@@ -133,6 +133,6 @@ dmypy.json
 # Project
 web/dist/
 node_modules/
-worker/.wrangler/
+.wrangler/
 worker/dist/
 validator/java/out/

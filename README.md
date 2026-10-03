@@ -10,7 +10,7 @@ and lock them out. This repository holds everything behind the site:
 
 | Directory    | What it is                                                                 |
 |--------------|----------------------------------------------------------------------------|
-| `web/`       | The static site: generator, templates, translations and the report data.    |
+| `web/`       | The static site: generator, templates, translations, report data, `wrangler.toml`. |
 | `validator/` | Reference validators in JavaScript, Python, PHP, Java and Go, with tests.  |
 | `worker/`    | The Cloudflare Worker behind the API at `https://v.identity.tw`.           |
 | `.github/`   | CI for all three, and deployment to Cloudflare on every push to `master`.  |
@@ -89,21 +89,25 @@ smoke-tests the build, runs all five validator implementations, and runs the
 Worker tests plus a wrangler dry run. A missing toolchain fails the job; nothing
 is skipped silently.
 
-Pull requests from this repository also get a preview deployment on
-Cloudflare Pages, smoke-tested and linked in a comment on the PR.
+The site is hosted as a Cloudflare Worker that serves static assets (the
+current form of Cloudflare Pages), configured in `web/wrangler.toml`;
+`web/redirect.js` runs in front of the assets to send www to the bare domain.
+Pull requests from this repository get a preview version with its own URL,
+smoke-tested and linked in a comment on the PR.
 
-Pushes to `master` deploy the Worker with `wrangler deploy` and the site with
-`wrangler pages deploy`, using the exact build artifact the tests ran against,
-then fetch the live pages and API to verify the deploy. A weekly scheduled run
+Pushes to `master` deploy the API Worker and the site with `wrangler deploy`,
+using the exact build artifact the tests ran against, then fetch the live
+pages and API to verify the deploy. Until the custom domains are attached the
+site lives at https://identitytw.bhomnick.workers.dev. A weekly scheduled run
 repeats the tests and the live checks. Dependabot opens weekly grouped
 update PRs for pip, npm, Go and the GitHub Actions.
 
 All of this needs these repository secrets:
 
-| Secret                  | Value                                                            |
-|-------------------------|------------------------------------------------------------------|
-| `CLOUDFLARE_API_TOKEN`  | Token with "Edit Cloudflare Workers" and "Cloudflare Pages: Edit" |
-| `CLOUDFLARE_ACCOUNT_ID` | Account ID from the Workers & Pages overview                      |
+| Secret                  | Value                                                                      |
+|-------------------------|----------------------------------------------------------------------------|
+| `CLOUDFLARE_API_TOKEN`  | API token: Account / Workers Scripts / Edit, Zone / Workers Routes / Edit, Zone / DNS / Edit (for the custom domains), Zone / Zone / Read, scoped to this account and the identity.tw zone. |
+| `CLOUDFLARE_ACCOUNT_ID` | Account ID from the Workers & Pages overview (already set).                |
 
 Until the secrets are set, the deploy and preview jobs print a warning and
 skip. After the custom domain is live, set the repository variable
@@ -119,12 +123,13 @@ cut over:
    the `modernize` branch / PR #23) and replace the scraped files:
    `heroku run -a <app> python manage.py export_providers > providers.json`,
    then `python web/scripts/import_providers.py providers.json --overwrite`.
-2. Create the Pages project: `npx wrangler pages project create identitytw --production-branch master`
-   (from `worker/`, after `npm install`), add the secrets above, and push to
-   `master`. Check the result at `identitytw.pages.dev`.
-3. In the Pages project, add `identity.tw` and `www.identity.tw` as custom
-   domains. Cloudflare updates the two DNS records that currently point at
-   Heroku's DNS targets.
+2. Add the secrets above and merge the static-site PR. CI deploys the site to
+   https://identitytw.bhomnick.workers.dev and checks it.
+3. Uncomment the two `[[routes]]` blocks in `web/wrangler.toml` and merge
+   that change. wrangler attaches `identity.tw` and `www.identity.tw` as
+   custom domains and replaces the DNS records that point at Heroku. Then set
+   the repository variable `SITE_URL` to `https://identity.tw`; the
+   post-deploy check then also verifies the www redirect.
 4. Delete the Heroku app and its database.
 
 Licensed under the MIT license. See `LICENSE`.

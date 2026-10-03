@@ -1,0 +1,33 @@
+# The identity.tw site, deployed as a Cloudflare Worker that serves static
+# assets. This is the current form of Cloudflare Pages; wrangler delegates
+# `pages` commands here. CI deploys it with:
+#
+#   wrangler deploy -c web/wrangler.toml            # production
+#   wrangler versions upload -c web/wrangler.toml   # preview URL for a pull request
+#
+# The build (python web/build.py) writes ./dist, including _headers from
+# web/public. redirect.js runs first on every request to send www to the bare
+# domain, then serves the assets.
+name = "identitytw"
+main = "redirect.js"
+compatibility_date = "2025-09-01"
+
+# https://identitytw.bhomnick.workers.dev: the staging URL, and the target of
+# the post-deploy checks until SITE_URL is set to the real domain.
+workers_dev = true
+preview_urls = true
+
+[assets]
+directory = "./dist"
+binding = "ASSETS"
+run_worker_first = true
+
+# Cutover: uncomment these two routes and deploy. wrangler creates the custom
+# domains and replaces the DNS records that currently point at Heroku.
+# [[routes]]
+# pattern = "identity.tw"
+# custom_domain = true
+#
+# [[routes]]
+# pattern = "www.identity.tw"
+# custom_domain = true

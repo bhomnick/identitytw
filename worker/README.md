@@ -34,10 +34,9 @@ secrets exist (Settings > Secrets and variables > Actions):
 
 Until the secrets are set the deploy step prints a notice and skips.
 
-Before the first automated deploy, check `name` in `wrangler.toml` against
-the Worker that currently serves `v.identity.tw` in the dashboard. If the
-names differ, either rename here or delete the old Worker after the new one
-is live, otherwise two Workers will fight over the custom domain.
+`name` in `wrangler.toml` is `green-shape-e78d`, the Worker that has served
+`v.identity.tw` through a zone route since 2021, so every deploy replaces it
+in place. The site is a separate Worker configured in `../web/wrangler.toml`.
 
 Manual deploy from a machine with `wrangler login` done:
 

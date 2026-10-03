@@ -57,6 +57,15 @@ if [ -n "$SITE" ]; then
     echo "FAIL  provider page: could not read a slug from providers.json"
     failures=$((failures + 1))
   fi
+  if [ "$SITE" = "https://identity.tw" ]; then
+    location="$(curl -sS -m 20 -o /dev/null -w '%{redirect_url}' https://www.identity.tw/ 2>/dev/null || true)"
+    if [ "$location" = "https://identity.tw/" ]; then
+      echo "ok    www redirect"
+    else
+      echo "FAIL  www redirect: https://www.identity.tw/ redirected to '${location:-nothing}', expected https://identity.tw/"
+      failures=$((failures + 1))
+    fi
+  fi
 fi
 
 if [ -n "$API" ]; then
