@@ -5,10 +5,25 @@
   // Report filters: category select and text search.
   var search = document.getElementById('report-search');
   var category = document.getElementById('report-category');
+  var sort = document.getElementById('report-sort');
   var rows = document.querySelectorAll('.report-table tbody tr[data-name]');
   var emptyRow = document.querySelector('.report-table .empty');
   var count = document.getElementById('report-count');
   if (search && category && rows.length) {
+    var tbody = rows[0].parentNode;
+    var original = Array.prototype.slice.call(rows);
+    var orders = {
+      category: function (a, b) { return original.indexOf(a) - original.indexOf(b); },
+      worst: function (a, b) { return (+a.dataset.score) - (+b.dataset.score) || a.dataset.name.localeCompare(b.dataset.name); },
+      best: function (a, b) { return (+b.dataset.score) - (+a.dataset.score) || a.dataset.name.localeCompare(b.dataset.name); },
+      name: function (a, b) { return a.dataset.name.localeCompare(b.dataset.name); },
+      updated: function (a, b) { return b.dataset.updated.localeCompare(a.dataset.updated) || a.dataset.name.localeCompare(b.dataset.name); }
+    };
+    var reorder = function () {
+      var sorted = original.slice().sort(orders[sort && sort.value] || orders.category);
+      sorted.forEach(function (row) { tbody.insertBefore(row, emptyRow); });
+    };
+    if (sort) { sort.addEventListener('change', reorder); }
     var apply = function () {
       var query = search.value.trim().toLowerCase();
       var wanted = category.value;

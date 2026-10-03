@@ -14,40 +14,49 @@
             <option value="{{ slug }}">{{ names[lang.code] }}</option>
             {% endfor %}
           </select>
+          <label class="muted" for="report-sort">{{ _('Sort') }}</label>
+          <select id="report-sort">
+            <option value="category">{{ _('Category') }}</option>
+            <option value="worst">{{ _('Worst first') }}</option>
+            <option value="best">{{ _('Best first') }}</option>
+            <option value="name">{{ _('Name') }}</option>
+            <option value="updated">{{ _('Recently checked') }}</option>
+          </select>
           <span class="count" id="report-count" aria-live="polite"></span>
         </div>
+        <p class="legend">
+          <span class="mark mark-good" aria-hidden="true">✓</span> {{ _('Full support') }}
+          <span class="mark mark-warn" aria-hidden="true">!</span> {{ _('Partial, or a separate process') }}
+          <span class="mark mark-bad" aria-hidden="true">✕</span> {{ _('Not supported') }}
+        </p>
         <div class="table-wrap">
           <table class="report-table">
             <thead>
               <tr>
                 <th scope="col">{{ _('Service') }}</th>
                 <th scope="col">{{ _('Category') }}</th>
-                <th scope="col">{{ _('Grade') }}</th>
-                <th scope="col">{{ _('Issues') }}</th>
+                <th scope="col" class="grade-head">{{ _('Grade') }}</th>
+                {% for criterion in criteria %}
+                <th scope="col" class="mark-head">{{ _(criterion.heading) }}</th>
+                {% endfor %}
                 <th scope="col">{{ _('Updated') }}</th>
               </tr>
             </thead>
             <tbody>
               {% for provider in providers %}
-              <tr data-name="{{ provider.name | lower }}" data-category="{{ provider.category }}">
-                <td><a href="{{ index_url }}providers/{{ provider.slug }}/">{{ provider.name }}</a></td>
-                <td>{{ category_name(provider.category) }}</td>
-                <td><span class="grade grade-{{ provider.grade_class }}">{{ provider.grade }}</span></td>
-                <td>
-                  {% if provider.reasons %}
-                  <ul>
-                    {% for reason in provider.reasons %}
-                    <li>{{ _(reason.short) }}</li>
-                    {% endfor %}
-                  </ul>
-                  {% else %}
-                  <span class="muted">{{ _('None') }}</span>
-                  {% endif %}
+              <tr data-name="{{ provider.name | lower }}" data-category="{{ provider.category }}" data-score="{{ provider.score }}" data-updated="{{ provider.updated.isoformat() }}">
+                <td class="name"><a href="{{ index_url }}providers/{{ provider.slug }}/">{{ provider.name }}</a></td>
+                <td class="category">{{ category_name(provider.category) }}</td>
+                <td class="grade-cell"><span class="grade grade-{{ provider.grade_class }}">{{ provider.grade }}</span></td>
+                {% for criterion in provider.criteria %}
+                <td class="mark-cell" data-label="{{ _(criterion.heading) }}">
+                  <span class="mark mark-{{ criterion.level }}" title="{{ _(criterion.short) }}"><span aria-hidden="true">{% if criterion.level == 'good' %}✓{% elif criterion.level == 'warn' %}!{% else %}✕{% endif %}</span><span class="sr-only">{{ _(criterion.short) }}</span></span>
                 </td>
-                <td class="nowrap" data-label="{{ _('Updated') }}">{{ provider.updated.isoformat() }}</td>
+                {% endfor %}
+                <td class="nowrap updated" data-label="{{ _('Updated') }}">{{ provider.updated.isoformat() }}</td>
               </tr>
               {% endfor %}
-              <tr class="empty" hidden><td colspan="5">{{ _('No services match.') }}</td></tr>
+              <tr class="empty" hidden><td colspan="8">{{ _('No services match.') }}</td></tr>
             </tbody>
           </table>
         </div>

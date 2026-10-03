@@ -117,6 +117,22 @@ CRITERIA_LABELS = {
     'registration': N_('Registration'),
 }
 
+# Short column headings for the scorecard table.
+CRITERIA_HEADINGS = {
+    'legacy_arc': N_('Legacy ARC'),
+    'new_arc': N_('New ARC'),
+    'service': N_('Service'),
+    'registration': N_('Registration'),
+}
+
+# How a criterion value reads at a glance: full support, a partial or separate
+# process, or no support.
+LEVELS = {
+    'full': 'good', 'online': 'good',
+    'separate': 'warn', 'partial': 'warn',
+    'none': 'bad', 'offline': 'bad',
+}
+
 GRADES = [(100, 'A+'), (90, 'A'), (80, 'B'), (70, 'C'), (60, 'D'), (50, 'E')]
 
 # language key -> (file under validator/, tab title, Pygments lexer)
@@ -153,6 +169,14 @@ class Criterion:
     short: str
     long: str
     label: str
+
+    @property
+    def heading(self):
+        return CRITERIA_HEADINGS[self.key]
+
+    @property
+    def level(self):
+        return LEVELS[self.value]
 
 
 @dataclass
@@ -324,6 +348,7 @@ def criteria_overview():
         {
             'key': key,
             'label': CRITERIA_LABELS[key],
+            'heading': CRITERIA_HEADINGS[key],
             'options': [
                 {'value': value, 'points': points, 'short': short, 'long': long}
                 for value, (points, short, long) in options.items()

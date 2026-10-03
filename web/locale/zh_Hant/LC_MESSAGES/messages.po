@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: identity.tw VERSION\n"
 "Report-Msgid-Bugs-To: https://github.com/bhomnick/identitytw/issues\n"
-"POT-Creation-Date: 2026-10-02 21:42-0700\n"
+"POT-Creation-Date: 2026-10-02 22:33-0700\n"
 "PO-Revision-Date: 2026-10-02 17:35-0700\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh_Hant\n"
@@ -98,6 +98,14 @@ msgstr "服務"
 # NEEDS NATIVE REVIEW: translated by Claude, 2026-10
 msgid "Registration"
 msgstr "註冊"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+msgid "Legacy ARC"
+msgstr "舊式證號"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+msgid "New ARC"
+msgstr "新式證號"
 
 # NEEDS NATIVE REVIEW: translated by Claude, 2026-10
 msgid "Skip to content"
@@ -364,16 +372,40 @@ msgid "All categories"
 msgstr "所有類別"
 
 # NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+msgid "Sort"
+msgstr "排序"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+msgid "Worst first"
+msgstr "最差優先"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+msgid "Best first"
+msgstr "最佳優先"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+msgid "Name"
+msgstr "名稱"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+msgid "Recently checked"
+msgstr "最近查核"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+msgid "Full support"
+msgstr "完整支援"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+msgid "Partial, or a separate process"
+msgstr "部分支援，或需另行處理"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+msgid "Not supported"
+msgstr "不支援"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
 msgid "Grade"
 msgstr "評等"
-
-# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
-msgid "Issues"
-msgstr "問題"
-
-# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
-msgid "None"
-msgstr "無"
 
 # NEEDS NATIVE REVIEW: translated by Claude, 2026-10
 msgid "No services match."
