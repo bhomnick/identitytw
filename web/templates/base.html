@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="{{ lang.code }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{% endblock %} · identity.tw</title>
+  <meta name="description" content="{% block description %}{% endblock %}">
+  <link rel="canonical" href="{{ site_url }}{{ page_url }}">
+  {% for alt in alternates %}
+  <link rel="alternate" hreflang="{{ alt.code }}" href="{{ site_url }}{{ alt.url }}">
+  {% endfor %}
+  <link rel="alternate" hreflang="x-default" href="{{ site_url }}{{ alternates[0].url }}">
+  <meta name="color-scheme" content="light dark">
+  <link rel="stylesheet" href="/static/site.css">
+  <link rel="stylesheet" href="/static/pygments.css">
+  <link rel="icon" href="/static/favicon.png">
+</head>
+<body>
+  <a class="skip-link" href="#main">{{ _('Skip to content') }}</a>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="{{ index_url }}">identity.tw</a>
+      <nav class="site-nav" aria-label="{{ _('Site') }}">
+        <a href="{{ index_url }}#report">{{ _('Report') }}</a>
+        <a href="{{ index_url }}#developers">{{ _('Developers') }}</a>
+        <a href="{{ repo_url }}">GitHub</a>
+        {% for alt in alternates if alt.code != lang.code %}
+        <a href="{{ alt.url }}" lang="{{ alt.code }}" hreflang="{{ alt.code }}">{{ alt.native_name }}</a>
+        {% endfor %}
+      </nav>
+    </div>
+  </header>
+  <main id="main">
+{% block content %}{% endblock %}
+  </main>
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2020–{{ year }} Ben Homnick · <a href="{{ repo_url }}">{{ _('Source code and data on GitHub') }}</a> · MIT</p>
+      <p>
+        {% for alt in alternates if alt.code != lang.code %}
+        <a href="{{ alt.url }}" lang="{{ alt.code }}" hreflang="{{ alt.code }}">{{ alt.native_name }}</a>
+        {% endfor %}
+      </p>
+    </div>
+  </footer>
+  <script src="/static/site.js"></script>
+</body>
+</html>

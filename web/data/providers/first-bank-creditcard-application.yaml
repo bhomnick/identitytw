@@ -1,0 +1,8 @@
+name: "First Bank Creditcard application"
+url: "https://ibank.firstbank.com.tw/NetBankNonTxn/CCard/cardApply01.html?openExternalBrowser=1&tp=1&ch=web002&em=TqdPwu"
+category: finance
+legacy_arc: none
+new_arc: none
+service: none
+registration: offline
+updated: 2021-02-25

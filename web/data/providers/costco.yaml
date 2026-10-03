@@ -1,0 +1,8 @@
+name: "Costco"
+url: "https://www.costco.com.tw/onlineregister/steps"
+category: retail
+legacy_arc: separate
+new_arc: separate
+service: full
+registration: online
+updated: 2021-01-24

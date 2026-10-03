@@ -1,0 +1,8 @@
+name: "MyData"
+url: "https://mydata.nat.gov.tw/signin"
+category: government
+legacy_arc: full
+new_arc: full
+service: full
+registration: online
+updated: 2023-08-29

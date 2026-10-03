@@ -7,30 +7,24 @@ on:
 
 jobs:
   site:
-    name: Django site
+    name: Static site
     runs-on: ubuntu-latest
-    env:
-      SECRET_KEY: ci-only-not-a-secret
-      DEBUG: "false"
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # provider pages show git history
       - uses: actions/setup-python@v5
         with:
           python-version-file: .python-version
           cache: pip
-      - run: sudo apt-get update && sudo apt-get install -y gettext
       - run: pip install -r requirements.txt
-      - name: Deployment checks
-        run: python manage.py check --deploy
-        env:
-          USE_SSL: "true"
-      - name: Migrations are up to date
-        run: python manage.py makemigrations --check --dry-run
-      - name: Translations compile
-        run: python manage.py compilemessages
-      - name: Static files collect (catches broken asset references)
-        run: python manage.py collectstatic --noinput
-      - run: python manage.py test common --verbosity 2
+      - run: python -m unittest discover -s web -p 'test_*.py' --verbose
+      - run: python web/build.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: site
+          path: web/dist
+          retention-days: 7
 
   validator:
     name: Validator implementations
@@ -47,6 +41,9 @@ jobs:
         with:
           distribution: temurin
           java-version: 21
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: validator/go/go.mod
       - run: php --version
       - run: ./validator/test.sh
 
@@ -68,29 +65,44 @@ jobs:
       - name: Bundle with wrangler (dry run)
         run: npm run check
 
-  deploy-worker:
-    name: Deploy Worker to Cloudflare
-    needs: [validator, worker]
+  deploy:
+    name: Deploy to Cloudflare
+    needs: [site, validator, worker]
     if: github.event_name == 'push' && github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: worker
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version-file: .python-version
+          cache: pip
       - uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
           cache-dependency-path: worker/package-lock.json
+      - run: pip install -r requirements.txt
+      - run: python web/build.py
       - run: npm ci
-      - name: wrangler deploy
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        working-directory: worker
+      - name: Deploy the API worker
+        working-directory: worker
         run: |
           if [ -z "$CLOUDFLARE_API_TOKEN" ] || [ -z "$CLOUDFLARE_ACCOUNT_ID" ]; then
-            echo "::notice::CLOUDFLARE_API_TOKEN / CLOUDFLARE_ACCOUNT_ID secrets are not set; skipping deploy."
+            echo "::notice::Cloudflare secrets are not set; skipping worker deploy."
             exit 0
           fi
           npx wrangler deploy
+      - name: Deploy the site to Cloudflare Pages
+        working-directory: worker
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ] || [ -z "$CLOUDFLARE_ACCOUNT_ID" ]; then
+            echo "::notice::Cloudflare secrets are not set; skipping site deploy."
+            exit 0
+          fi
+          npx wrangler pages deploy ../web/dist --project-name identitytw --branch master --commit-dirty=true

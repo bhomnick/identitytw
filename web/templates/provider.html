@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block title %}{{ provider.name }} · {{ _('Transparency Report') }}{% endblock %}
+{% block description %}{{ _('%(name)s: grade %(grade)s for how it treats ARC holders.', name=provider.name, grade=provider.grade) }}{% endblock %}
+{% block content %}
+    <section class="provider-page">
+      <div class="container">
+        <p><a href="{{ index_url }}#report">← {{ _('Transparency Report') }}</a></p>
+        <h1>{{ provider.name }} <span class="grade grade-{{ provider.grade_class }}">{{ provider.grade }}</span></h1>
+        <p class="provider-meta">
+          <a href="{{ provider.url }}" rel="nofollow noopener" target="_blank">{{ provider.url }}</a><br>
+          {{ _('Category') }}: {{ category_name(provider.category) }} ·
+          {{ _('Score') }}: {{ provider.score }} / 100 ·
+          {{ _('Updated') }}: {{ provider.updated.isoformat() }}
+        </p>
+
+        <div class="table-wrap">
+          <table class="criteria-table">
+            <thead>
+              <tr>
+                <th scope="col">{{ _('Criterion') }}</th>
+                <th scope="col">{{ _('Result') }}</th>
+                <th scope="col">{{ _('Points') }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for criterion in provider.criteria %}
+              <tr{% if criterion.points %} class="penalised"{% endif %}>
+                <td>{{ _(criterion.label) }}</td>
+                <td>{{ _(criterion.long) }}</td>
+                <td>{{ criterion.points }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+
+        {% if provider.notes %}
+        <h2>{{ _('Notes') }}</h2>
+        {% for paragraph in provider.notes.split('\n\n') %}
+        <p>{{ paragraph }}</p>
+        {% endfor %}
+        {% endif %}
+
+        {% if provider.sources %}
+        <h2>{{ _('Sources') }}</h2>
+        <ul>
+          {% for source in provider.sources %}
+          <li><a href="{{ source }}" rel="nofollow noopener">{{ source }}</a></li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+
+        {% if history %}
+        <h2>{{ _('History') }}</h2>
+        <ul class="history">
+          {% for date, subject in history %}
+          <li><time datetime="{{ date }}">{{ date }}</time>{{ subject }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+
+        <p class="muted">
+          <a href="{{ repo_url }}/edit/master/web/data/providers/{{ provider.slug }}.yaml">{{ _('Edit this entry on GitHub') }}</a> ·
+          <a href="{{ repo_url }}/issues/new">{{ _('Report a change') }}</a>
+        </p>
+      </div>
+    </section>
+{% endblock %}

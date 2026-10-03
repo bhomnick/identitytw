@@ -1,0 +1,8 @@
+name: "YouBike 2.0"
+url: "https://play.google.com/store/apps/details?id=tw.com.youbike.plus"
+category: transportation
+legacy_arc: separate
+new_arc: separate
+service: full
+registration: online
+updated: 2021-01-11

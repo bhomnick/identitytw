@@ -1,0 +1,8 @@
+name: "Highway Police Traffic Offense Report"
+url: "https://wos.hpb.gov.tw/RV"
+category: government
+legacy_arc: separate
+new_arc: separate
+service: full
+registration: online
+updated: 2026-08-29

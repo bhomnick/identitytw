@@ -1,0 +1,8 @@
+name: "Cathay United Bank - EZWallet"
+url: "https://www.cathaybk.com.tw/ALS/deposit/JKOS/jkos_s1.aspx"
+category: finance
+legacy_arc: full
+new_arc: none
+service: full
+registration: online
+updated: 2021-04-21

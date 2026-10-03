@@ -1,0 +1,8 @@
+name: "Taiwan Railways"
+url: "https://www.railway.gov.tw/"
+category: transportation
+legacy_arc: separate
+new_arc: separate
+service: partial
+registration: online
+updated: 2026-08-29

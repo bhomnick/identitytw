@@ -1,0 +1,8 @@
+name: "LINE Mobile"
+url: "https://www.linemobile-tw.com/"
+category: communication
+legacy_arc: full
+new_arc: full
+service: full
+registration: offline
+updated: 2024-06-30

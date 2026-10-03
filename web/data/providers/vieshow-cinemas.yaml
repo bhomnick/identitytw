@@ -1,0 +1,8 @@
+name: "Vieshow Cinemas"
+url: "https://www.vscinemas.com.tw/vsweb/ishow/card.aspx"
+category: entertainment
+legacy_arc: full
+new_arc: full
+service: full
+registration: online
+updated: 2023-09-20

@@ -1,0 +1,8 @@
+name: "Taipei City Problem Report"
+url: "https://hello.gov.taipei/Front/main"
+category: government
+legacy_arc: separate
+new_arc: separate
+service: partial
+registration: offline
+updated: 2026-08-29

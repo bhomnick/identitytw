@@ -1,0 +1,8 @@
+name: "E-Gov Portal Registration"
+url: "https://www.cp.gov.tw/portal/cpinit/Register.aspx"
+category: government
+legacy_arc: full
+new_arc: full
+service: full
+registration: online
+updated: 2021-04-05

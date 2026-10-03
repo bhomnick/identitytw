@@ -1,0 +1,8 @@
+name: "PCHome MyName"
+url: "http://myname.pchome.com.tw/"
+category: internet
+legacy_arc: none
+new_arc: none
+service: partial
+registration: offline
+updated: 2026-08-29

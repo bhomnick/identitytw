@@ -1,0 +1,8 @@
+name: "Bank of Taiwan Coin Set"
+url: "https://coinset.bot.com.tw/Purchase"
+category: finance
+legacy_arc: full
+new_arc: full
+service: full
+registration: online
+updated: 2023-09-20

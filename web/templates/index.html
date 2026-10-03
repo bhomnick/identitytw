@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+{% block title %}{{ _('Which online services in Taiwan accept resident ID numbers?') }}{% endblock %}
+{% block description %}{{ _('A public scorecard of how Taiwanese online services treat ARC holders, plus free validation code that accepts every legal ID number format.') }}{% endblock %}
+{% block content %}
+    <section class="hero">
+      <div class="container">
+        <h1>{{ _('Which online services in Taiwan accept resident ID numbers?') }}</h1>
+        <p class="lead">{{ _('Foreign residents hold an Alien Resident Certificate (ARC) number instead of a national ID. Many websites reject it. This site scores %(count)s services on how they treat ARC holders, and gives developers the code to fix theirs.', count=stats.total) }}</p>
+        <div class="actions">
+          <a class="button" href="#report">{{ _('See the report') }}</a>
+          <a class="button secondary" href="#developers">{{ _('Fix your validator') }}</a>
+        </div>
+        <div class="stats">
+          <div class="stat"><strong>{{ stats.total }}</strong><span>{{ _('services reviewed') }}</span></div>
+          <div class="stat"><strong>{{ stats.fully_inclusive }}</strong><span>{{ _('fully inclusive (grade A+)') }}</span></div>
+          <div class="stat"><strong>{{ stats.reject_new_arc }}</strong><span>{{ _('reject the ARC number format issued since 2021') }}</span></div>
+          <div class="stat"><strong>{{ stats.deny_service }}</strong><span>{{ _('deny service to non-citizens outright') }}</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="report">
+      <div class="container">
+        <h2>{{ _('Transparency Report') }}</h2>
+        <p class="lead">{{ _('Each service is scored on whether it accepts legacy and new ARC numbers, offers the same service to non-citizens, and lets them register online. Click a service for the full breakdown and its history.') }}</p>
+        <p>{{ _('Found a service that rejects your ARC number, or one that has fixed it?') }} <a href="{{ repo_url }}/issues/new">{{ _('Report it on GitHub') }}</a>.</p>
+        <div class="filters">
+          <label class="muted" for="report-search">{{ _('Search') }}</label>
+          <input id="report-search" type="search" placeholder="{{ _('Service name') }}" autocomplete="off">
+          <label class="muted" for="report-category">{{ _('Category') }}</label>
+          <select id="report-category">
+            <option value="">{{ _('All categories') }}</option>
+            {% for slug, names in categories.items() %}
+            <option value="{{ slug }}">{{ names[lang.code] }}</option>
+            {% endfor %}
+          </select>
+          <span class="count" id="report-count" aria-live="polite"></span>
+        </div>
+        <div class="table-wrap">
+          <table class="report-table">
+            <thead>
+              <tr>
+                <th scope="col">{{ _('Service') }}</th>
+                <th scope="col">{{ _('Category') }}</th>
+                <th scope="col">{{ _('Grade') }}</th>
+                <th scope="col">{{ _('Issues') }}</th>
+                <th scope="col">{{ _('Updated') }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for provider in providers %}
+              <tr data-name="{{ provider.name | lower }}" data-category="{{ provider.category }}">
+                <td><a href="{{ index_url }}providers/{{ provider.slug }}/">{{ provider.name }}</a></td>
+                <td>{{ category_name(provider.category) }}</td>
+                <td><span class="grade grade-{{ provider.grade_class }}">{{ provider.grade }}</span></td>
+                <td>
+                  {% if provider.reasons %}
+                  <ul>
+                    {% for reason in provider.reasons %}
+                    <li>{{ _(reason.short) }}</li>
+                    {% endfor %}
+                  </ul>
+                  {% else %}
+                  <span class="muted">{{ _('None') }}</span>
+                  {% endif %}
+                </td>
+                <td class="nowrap" data-label="{{ _('Updated') }}">{{ provider.updated.isoformat() }}</td>
+              </tr>
+              {% endfor %}
+              <tr class="empty" hidden><td colspan="5">{{ _('No services match.') }}</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="muted">
+          <a href="/providers.json">{{ _('Download the data as JSON') }}</a> ·
+          <a href="{{ repo_url }}/tree/master/web/data/providers">{{ _('Edit the data on GitHub') }}</a>
+        </p>
+
+        <h3>{{ _('How the grades work') }}</h3>
+        <p>{{ _('Every service starts at 100 points. Each criterion below can deduct points, and the grade follows from the total.') }}</p>
+        <div class="criteria">
+          {% for criterion in criteria %}
+          <div class="card">
+            <h3>{{ _(criterion.label) }}</h3>
+            <dl>
+              {% for option in criterion.options %}
+              <dt><span>{{ _(option.short) }}</span><span class="points{% if option.points == 0 %} zero{% endif %}">{{ option.points }}</span></dt>
+              <dd>{{ _(option.long) }}</dd>
+              {% endfor %}
+            </dl>
+          </div>
+          {% endfor %}
+        </div>
+        <p class="grade-scale">
+          {% for threshold, grade in grades %}
+          <span class="grade grade-{{ grade[0] | lower }}">{{ grade }}</span> <span class="muted">≥ {{ threshold }}</span>
+          {% endfor %}
+          <span class="grade grade-f">F</span> <span class="muted">&lt; 50</span>
+        </p>
+      </div>
+    </section>
+
+    <section id="developers">
+      <div class="container">
+        <h2>{{ _('For developers') }}</h2>
+        <p class="lead">{{ _('Taiwan has three ID number formats. They share one check digit algorithm and differ only in the second character. A validator that only allows 1 or 2 there rejects every foreign resident.') }}</p>
+        <div class="table-wrap">
+          <table class="formats">
+            <thead>
+              <tr>
+                <th scope="col">{{ _('Format') }}</th>
+                <th scope="col">{{ _('Example') }}</th>
+                <th scope="col">{{ _('Second character') }}</th>
+                <th scope="col">{{ _('Issued to') }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>{{ _('National ID') }}</td><td><code>A123456789</code></td><td><code>1</code> {{ _('or') }} <code>2</code></td><td>{{ _('Citizens') }}</td></tr>
+              <tr><td>{{ _('Legacy ARC number') }}</td><td><code>AB12345677</code></td><td><code>A</code> – <code>D</code></td><td>{{ _('Foreign residents, before 2021') }}</td></tr>
+              <tr><td>{{ _('New ARC number') }}</td><td><code>A800000014</code></td><td><code>8</code> {{ _('or') }} <code>9</code></td><td>{{ _('Foreign residents, since January 2021') }}</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 id="validation-libraries">{{ _('Validation code') }}</h3>
+        <p>{{ _('Each implementation accepts all three formats and is tested against the same set of IDs on every change. Copy the one for your language.') }}</p>
+        <div class="tabs">
+          <div role="tablist" aria-label="{{ _('Programming language') }}">
+            {% for language, snippet in snippets.items() %}
+            <button role="tab" id="tab-{{ language }}" aria-controls="panel-{{ language }}" aria-selected="{{ 'true' if loop.first else 'false' }}" tabindex="{{ 0 if loop.first else -1 }}">{{ snippet.title }}</button>
+            {% endfor %}
+          </div>
+          {% for language, snippet in snippets.items() %}
+          <div role="tabpanel" id="panel-{{ language }}" aria-labelledby="tab-{{ language }}"{% if not loop.first %} hidden{% endif %}>
+            {{ snippet.html }}
+          </div>
+          {% endfor %}
+        </div>
+        <p class="muted"><a href="{{ repo_url }}/tree/master/validator">{{ _('Source and tests on GitHub') }}</a></p>
+
+        <div class="two-col">
+          <div>
+            <h3 id="validation-service">{{ _('Hosted validation API') }}</h3>
+            <p>{{ _('A free endpoint for trying the algorithm. In production, use the code above so that ID numbers never leave your own systems. Nothing sent to this endpoint is logged.') }}</p>
+            <pre><code>GET {{ api_url }}/?id=A123456789</code></pre>
+            {{ example_response }}
+          </div>
+          <div class="try-it">
+            <h3>{{ _('Try it out') }}</h3>
+            <form id="api-form" data-api-url="{{ api_url }}/?id=">
+              <label class="muted" for="api-id">{{ _('ID number') }}</label>
+              <input id="api-id" name="id" placeholder="A123456789" autocomplete="off" spellcheck="false">
+              <button class="button" type="submit" id="api-submit" disabled>{{ _('Validate') }}</button>
+            </form>
+            <div id="api-example" hidden>
+              <h4>{{ _('Request') }}</h4>
+              <pre><code id="api-request"></code></pre>
+              <h4>{{ _('Response') }}</h4>
+              <pre><code id="api-response"></code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+{% endblock %}

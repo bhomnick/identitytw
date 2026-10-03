@@ -10,6 +10,7 @@ and keep the fixture in sync.
 | Python     | `python/taiwan_id.py`        | `is_valid(id_number)`  |
 | PHP        | `php/TaiwanId.php`           | `isValid($idNumber)`   |
 | Java       | `java/TaiwanId.java`         | `TaiwanId.isValid(..)` |
+| Go         | `go/taiwanid.go`             | `taiwanid.IsValid(id)` |
 
 The JavaScript module is also what the Cloudflare Worker in `../worker`
 serves at `https://v.identity.tw`.
@@ -35,6 +36,6 @@ ID is valid when the total is divisible by 10.
     ./test.sh                                   # all languages
     VALIDATOR_LANGS="python javascript" ./test.sh
 
-Requires `python3`, `node` (18+), `php` (8+) and a JDK (11+). The Java
+Requires `python3`, `node` (18+), `php` (8+), a JDK (11+) and Go (1.22+). The Java
 harness runs twice, once under a Turkish locale, because `toUpperCase()`
 without `Locale.ROOT` turns `i` into `İ` there and rejects valid IDs.

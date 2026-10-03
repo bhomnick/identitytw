@@ -1,0 +1,8 @@
+name: "CTBC Creditcard"
+url: "https://ob.ctbcbank.com/card/#/apply?CrdTp=&Crd=C_CAL&CrdF=8538&CrdFace=02&CrdB=&CrdG=&Unit=&Emp=&SPC="
+category: finance
+legacy_arc: none
+new_arc: none
+service: none
+registration: offline
+updated: 2022-06-14

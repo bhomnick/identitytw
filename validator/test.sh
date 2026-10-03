@@ -4,7 +4,7 @@
 set -euo pipefail
 cd "$(dirname "$0")"
 
-LANGS="${VALIDATOR_LANGS:-python javascript php java}"
+LANGS="${VALIDATOR_LANGS:-python javascript php java go}"
 PYTHON="${PYTHON:-python3}"
 
 for lang in $LANGS; do
@@ -17,6 +17,7 @@ for lang in $LANGS; do
                 java -cp "$out" TaiwanIdTest fixtures.txt
                 # Turkish locale upper-cases "i" to "İ"; guards the Locale.ROOT call.
                 java -Duser.language=tr -Duser.country=TR -cp "$out" TaiwanIdTest fixtures.txt ;;
+    go)         (cd go && go test ./...) ;;
     *)          echo "unknown language: $lang" >&2; exit 2 ;;
   esac
 done

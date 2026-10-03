@@ -1,0 +1,8 @@
+name: "E.Sun Bank Creditcard Application"
+url: "https://card.esunbank.com.tw/EsunCreditweb/txnproc/preChoice?PRJCD=APYCRD0002#b"
+category: finance
+legacy_arc: none
+new_arc: none
+service: none
+registration: offline
+updated: 2021-05-04

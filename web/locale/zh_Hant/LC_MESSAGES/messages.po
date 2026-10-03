@@ -1,0 +1,465 @@
+# Traditional Chinese translations for identity.tw.
+# Strings marked "NEEDS NATIVE REVIEW" were machine-drafted and await review.
+msgid ""
+msgstr ""
+"Project-Id-Version: identity.tw VERSION\n"
+"Report-Msgid-Bugs-To: https://github.com/bhomnick/identitytw/issues\n"
+"POT-Creation-Date: 2026-10-02 17:35-0700\n"
+"PO-Revision-Date: 2026-10-02 17:35-0700\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: zh_Hant\n"
+"Language-Team: zh_Hant <https://github.com/bhomnick/identitytw/issues>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: web/build.py:68
+msgid "Full legacy ARC support"
+msgstr "舊式外來人口統一證號完整接受"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/build.py:69
+msgid "Fully accepts legacy ARC number in place of ROC ID"
+msgstr "完全接受以舊式外來人口統一證號取代身分證字號"
+
+#: web/build.py:70
+msgid "Legacy ARC requires separate UI"
+msgstr "舊式外來人口統一證號需要單獨的UI"
+
+#: web/build.py:71
+msgid "Accepts legacy ARC number in a separate UI (passport number, for instance)"
+msgstr "舊式外來人口統一證號需要單獨的UI (例如護照號碼）"
+
+#: web/build.py:72
+msgid "No legacy ARC support"
+msgstr "不接受舊式外來人口統一證號"
+
+#: web/build.py:73
+msgid "Does not accept legacy ARC numbers"
+msgstr "不接受舊式外來人口統一證號"
+
+#: web/build.py:76
+msgid "Full new ARC support"
+msgstr "新式外來人口統一證號完整接受"
+
+#: web/build.py:77
+msgid "Fully accepts new ARC number in place of ROC ID"
+msgstr "新式外來人口統一證號完整接受"
+
+#: web/build.py:78
+msgid "New ARC requires separate UI"
+msgstr "新式外來人口統一證號需要單獨的UI"
+
+#: web/build.py:79
+msgid "Accepts new ARC number in a separate UI (passport number, for instance)"
+msgstr "新式外來人口統一證號需要單獨的UI (例如護照號碼）"
+
+#: web/build.py:80
+msgid "No new ARC support"
+msgstr "不接受新式外來人口統一證號"
+
+#: web/build.py:81
+msgid "Does not accept new ARC numbers"
+msgstr "不接受新式外來人口統一證號"
+
+#: web/build.py:84
+msgid "Full service for all users"
+msgstr "為所有使用者提供相同的服務"
+
+#: web/build.py:85
+msgid "Provides same service to all users"
+msgstr "為所有使用者提供相同的服務"
+
+#: web/build.py:86
+msgid "Some services not available to non-citizens"
+msgstr "非國民無法使用某些服務"
+
+#: web/build.py:87
+msgid "A portion of features not available to non-citizens"
+msgstr "非國民無法使用某些服務"
+
+#: web/build.py:88
+msgid "Denies service to non-citizens"
+msgstr "非國民被拒絕使用所有服務"
+
+#: web/build.py:89
+msgid "Denies all services to non-citizens"
+msgstr "非國民被拒絕使用所有服務"
+
+#: web/build.py:92
+msgid "All users may register online"
+msgstr "所有使用者都可以線上註冊"
+
+#: web/build.py:93
+msgid "All users may register online using the same process"
+msgstr "所有使用者都可以使用相同的流程線上註冊"
+
+#: web/build.py:94
+msgid "Non-citizens require offline registration"
+msgstr "非公民需要離線註冊"
+
+#: web/build.py:95
+msgid "Non-citizens require additional offline registration steps"
+msgstr "非國民需要離線註冊步驟"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/build.py:100
+msgid "Legacy ARC numbers"
+msgstr "舊式外來人口統一證號"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/build.py:101
+msgid "New ARC numbers"
+msgstr "新式外來人口統一證號"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/build.py:102 web/templates/index.html:43
+msgid "Service"
+msgstr "服務"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/build.py:103
+msgid "Registration"
+msgstr "註冊"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/templates/base.html:19
+msgid "Skip to content"
+msgstr "跳至主要內容"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/templates/base.html:23
+msgid "Site"
+msgstr "網站"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/templates/base.html:24
+msgid "Report"
+msgstr "報告"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/templates/base.html:25
+msgid "Developers"
+msgstr "開發者"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/templates/base.html:38
+msgid "Source code and data on GitHub"
+msgstr "GitHub 上的原始碼與資料"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/templates/index.html:2 web/templates/index.html:7
+msgid "Which online services in Taiwan accept resident ID numbers?"
+msgstr "台灣有哪些線上服務接受外來人口統一證號？"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/templates/index.html:3
+msgid ""
+"A public scorecard of how Taiwanese online services treat ARC holders, plus free validation code "
+"that accepts every legal ID number format."
+msgstr "公開評比台灣線上服務對居留證持有人的待遇，並提供可接受所有合法證號格式的免費驗證程式碼。"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/templates/index.html:8
+#, python-format
+msgid ""
+"Foreign residents hold an Alien Resident Certificate (ARC) number instead of a national ID. Many "
+"websites reject it. This site scores %(count)s services on how they treat ARC holders, and gives "
+"developers the code to fix theirs."
+msgstr "外籍居民持有的是居留證（ARC）上的外來人口統一證號，而非身分證字號，但許多網站不接受。本站針對 %(count)s 個服務評比其對居留證持有人的待遇，並提供開發者修正驗證程式的程式碼。"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/templates/index.html:10
+msgid "See the report"
+msgstr "查看報告"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/templates/index.html:11
+msgid "Fix your validator"
+msgstr "修正你的驗證程式"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/templates/index.html:14
+msgid "services reviewed"
+msgstr "個服務受評"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/templates/index.html:15
+msgid "fully inclusive (grade A+)"
+msgstr "完全包容（A+ 評等）"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/templates/index.html:16
+msgid "reject the ARC number format issued since 2021"
+msgstr "不接受 2021 年起核發的新式統一證號"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/templates/index.html:17
+msgid "deny service to non-citizens outright"
+msgstr "完全拒絕提供服務給非國民"
+
+#: web/templates/index.html:24 web/templates/provider.html:2 web/templates/provider.html:7
+msgid "Transparency Report"
+msgstr "透明度報告"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/templates/index.html:25
+msgid ""
+"Each service is scored on whether it accepts legacy and new ARC numbers, offers the same service "
+"to non-citizens, and lets them register online. Click a service for the full breakdown and its "
+"history."
+msgstr "每個服務依據是否接受舊式與新式外來人口統一證號、是否對非國民提供相同服務、以及非國民是否可線上註冊來評分。點選服務可查看完整評分與變更紀錄。"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/templates/index.html:26
+msgid "Found a service that rejects your ARC number, or one that has fixed it?"
+msgstr "發現有服務不接受您的統一證號，或是已經修正了嗎？"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/templates/index.html:26
+msgid "Report it on GitHub"
+msgstr "到 GitHub 回報"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/templates/index.html:28
+msgid "Search"
+msgstr "搜尋"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/templates/index.html:29
+msgid "Service name"
+msgstr "服務名稱"
+
+#: web/templates/index.html:30 web/templates/index.html:44 web/templates/provider.html:11
+msgid "Category"
+msgstr "類別"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/templates/index.html:32
+msgid "All categories"
+msgstr "所有類別"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/templates/index.html:45
+msgid "Grade"
+msgstr "評等"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/templates/index.html:46
+msgid "Issues"
+msgstr "問題"
+
+#: web/templates/index.html:47 web/templates/provider.html:13
+msgid "Updated"
+msgstr "更新時間"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/templates/index.html:64
+msgid "None"
+msgstr "無"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/templates/index.html:70
+msgid "No services match."
+msgstr "沒有符合的服務。"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/templates/index.html:75
+msgid "Download the data as JSON"
+msgstr "下載 JSON 資料"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/templates/index.html:76
+msgid "Edit the data on GitHub"
+msgstr "在 GitHub 上編輯資料"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/templates/index.html:79
+msgid "How the grades work"
+msgstr "評等方式"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/templates/index.html:80
+msgid ""
+"Every service starts at 100 points. Each criterion below can deduct points, and the grade follows"
+" from the total."
+msgstr "每個服務從 100 分起算，以下各項目可能扣分，評等依總分而定。"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/templates/index.html:105
+msgid "For developers"
+msgstr "給開發者"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/templates/index.html:106
+msgid ""
+"Taiwan has three ID number formats. They share one check digit algorithm and differ only in the "
+"second character. A validator that only allows 1 or 2 there rejects every foreign resident."
+msgstr "台灣的證號有三種格式，檢查碼演算法相同，只有第二個字元不同。只允許第二個字元為 1 或 2 的驗證程式會拒絕所有外籍居民。"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/templates/index.html:111
+msgid "Format"
+msgstr "格式"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/templates/index.html:112
+msgid "Example"
+msgstr "範例"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/templates/index.html:113
+msgid "Second character"
+msgstr "第二個字元"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/templates/index.html:114
+msgid "Issued to"
+msgstr "核發對象"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/templates/index.html:118
+msgid "National ID"
+msgstr "身分證字號"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/templates/index.html:118 web/templates/index.html:120
+msgid "or"
+msgstr "或"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/templates/index.html:118
+msgid "Citizens"
+msgstr "國民"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/templates/index.html:119
+msgid "Legacy ARC number"
+msgstr "舊式外來人口統一證號"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/templates/index.html:119
+msgid "Foreign residents, before 2021"
+msgstr "外籍居民，2021 年以前核發"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/templates/index.html:120
+msgid "New ARC number"
+msgstr "新式外來人口統一證號"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/templates/index.html:120
+msgid "Foreign residents, since January 2021"
+msgstr "外籍居民，2021 年 1 月起核發"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/templates/index.html:125
+msgid "Validation code"
+msgstr "驗證程式碼"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/templates/index.html:126
+msgid ""
+"Each implementation accepts all three formats and is tested against the same set of IDs on every "
+"change. Copy the one for your language."
+msgstr "每個實作都接受全部三種格式，且每次變更都以同一組證號測試。請複製您使用的語言版本。"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/templates/index.html:128
+msgid "Programming language"
+msgstr "程式語言"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/templates/index.html:139
+msgid "Source and tests on GitHub"
+msgstr "GitHub 上的原始碼與測試"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/templates/index.html:143
+msgid "Hosted validation API"
+msgstr "線上驗證 API"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/templates/index.html:144
+msgid ""
+"A free endpoint for trying the algorithm. In production, use the code above so that ID numbers "
+"never leave your own systems. Nothing sent to this endpoint is logged."
+msgstr "免費的演算法試用端點。正式環境請使用上方程式碼，讓證號不會離開您自己的系統。送至此端點的資料不會被記錄。"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/templates/index.html:149
+msgid "Try it out"
+msgstr "試試看"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/templates/index.html:151
+msgid "ID number"
+msgstr "證號"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/templates/index.html:153
+msgid "Validate"
+msgstr "驗證"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/templates/index.html:156
+msgid "Request"
+msgstr "請求"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/templates/index.html:158
+msgid "Response"
+msgstr "回應"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/templates/provider.html:3
+#, python-format
+msgid "%(name)s: grade %(grade)s for how it treats ARC holders."
+msgstr "%(name)s：對居留證持有人待遇的評等為 %(grade)s。"
+
+#: web/templates/provider.html:12
+msgid "Score"
+msgstr "等級"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/templates/provider.html:20
+msgid "Criterion"
+msgstr "評分項目"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/templates/provider.html:21
+msgid "Result"
+msgstr "結果"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/templates/provider.html:22
+msgid "Points"
+msgstr "得分"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/templates/provider.html:38
+msgid "Notes"
+msgstr "備註"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/templates/provider.html:45
+msgid "Sources"
+msgstr "來源"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/templates/provider.html:54
+msgid "History"
+msgstr "變更紀錄"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/templates/provider.html:63
+msgid "Edit this entry on GitHub"
+msgstr "在 GitHub 上編輯此項目"
+
+# NEEDS NATIVE REVIEW: translated by Claude, 2026-10
+#: web/templates/provider.html:64
+msgid "Report a change"
+msgstr "回報變更"
+

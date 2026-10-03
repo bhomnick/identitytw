@@ -1,0 +1,8 @@
+name: "Compensation System for Quarantine"
+url: "https://swis.mohw.gov.tw/covidweb"
+category: health
+legacy_arc: separate
+new_arc: separate
+service: full
+registration: online
+updated: 2022-05-11

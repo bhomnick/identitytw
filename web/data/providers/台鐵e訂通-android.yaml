@@ -1,0 +1,8 @@
+name: "台鐵e訂通 (Android)"
+url: "https://play.google.com/store/apps/details?id=tw.gov.tra.twtraffic"
+category: transportation
+legacy_arc: full
+new_arc: none
+service: full
+registration: online
+updated: 2022-05-13

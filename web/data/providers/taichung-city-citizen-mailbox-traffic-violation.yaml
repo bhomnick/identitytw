@@ -1,0 +1,8 @@
+name: "Taichung City Citizen Mailbox - Traffic Violation"
+url: "https://talk.taichung.gov.tw/Home/Case"
+category: government
+legacy_arc: none
+new_arc: none
+service: partial
+registration: offline
+updated: 2025-07-21
