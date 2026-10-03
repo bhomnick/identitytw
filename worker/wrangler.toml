@@ -1,0 +1,15 @@
+# Cloudflare Worker for https://v.identity.tw
+#
+# `name` must match the Worker that already serves v.identity.tw (see
+# Workers & Pages in the Cloudflare dashboard), otherwise the first deploy
+# creates a second Worker instead of replacing the existing one.
+name = "identity-validator"
+main = "src/index.js"
+compatibility_date = "2025-09-01"
+
+# Serve only on the custom domain, not on *.workers.dev.
+workers_dev = false
+
+[[routes]]
+pattern = "v.identity.tw"
+custom_domain = true
