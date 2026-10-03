@@ -35,4 +35,6 @@ ID is valid when the total is divisible by 10.
     ./test.sh                                   # all languages
     VALIDATOR_LANGS="python javascript" ./test.sh
 
-Requires `python3`, `node` (18+), `php` (8+) and a JDK (11+).
+Requires `python3`, `node` (18+), `php` (8+) and a JDK (11+). The Java
+harness runs twice, once under a Turkish locale, because `toUpperCase()`
+without `Locale.ROOT` turns `i` into `İ` there and rejects valid IDs.

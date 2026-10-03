@@ -27,6 +27,7 @@ test('shared fixture', () => {
 test('lower-case input is accepted', () => {
   assert.equal(isValid('a123456789'), true);
   assert.equal(isValid('ab12345677'), true);
+  assert.equal(isValid('i123456781'), true, 'lower-case i must upper-case to I in every locale');
 });
 
 test('surrounding whitespace is rejected', () => {

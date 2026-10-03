@@ -33,6 +33,7 @@ foreach (file(__DIR__ . '/../fixtures.txt') as $line) {
 // Lower-case input is accepted.
 check('a123456789', true);
 check('ab12345677', true);
+check('i123456781', true);
 // Surrounding whitespace, empty input are rejected.
 check(' A123456789', false);
 check('A123456789 ', false);

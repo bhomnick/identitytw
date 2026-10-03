@@ -28,6 +28,7 @@ class IsValidTests(unittest.TestCase):
     def test_lower_case_input_is_accepted(self):
         self.assertTrue(is_valid('a123456789'))
         self.assertTrue(is_valid('ab12345677'))
+        self.assertTrue(is_valid('i123456781'))
 
     def test_surrounding_whitespace_is_rejected(self):
         for value in (' A123456789', 'A123456789 ', 'A123456789\n', 'A 23456789'):

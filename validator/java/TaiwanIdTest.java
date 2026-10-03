@@ -34,6 +34,7 @@ public final class TaiwanIdTest {
         // Lower-case input is accepted.
         check("a123456789", true);
         check("ab12345677", true);
+        check("i123456781", true); // under a Turkish locale, toUpperCase() without Locale.ROOT turns i into İ
         // Surrounding whitespace, empty and null input are rejected.
         check(" A123456789", false);
         check("A123456789 ", false);

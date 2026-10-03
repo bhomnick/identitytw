@@ -13,7 +13,10 @@ for lang in $LANGS; do
     python)     "$PYTHON" -m unittest discover -s python -p 'test_*.py' ;;
     javascript) (cd javascript && node --test) ;;
     php)        php php/test.php ;;
-    java)       out="$(mktemp -d)"; javac -d "$out" java/*.java && java -cp "$out" TaiwanIdTest fixtures.txt ;;
+    java)       out="$(mktemp -d)"; javac -d "$out" java/*.java
+                java -cp "$out" TaiwanIdTest fixtures.txt
+                # Turkish locale upper-cases "i" to "İ"; guards the Locale.ROOT call.
+                java -Duser.language=tr -Duser.country=TR -cp "$out" TaiwanIdTest fixtures.txt ;;
     *)          echo "unknown language: $lang" >&2; exit 2 ;;
   esac
 done
